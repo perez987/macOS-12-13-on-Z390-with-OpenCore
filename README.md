@@ -93,7 +93,7 @@ If you don't have an external graphics card and need to use the integrated one, 
 - added in config.plist >> boot-args >> igfxonln=1 -disablegfxfirmware
 - added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
 
->          <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+>           <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
             <dict>
                 <key>AAPL,ig-platform-id</key>
                 <data>BwCbPg==</data>
@@ -119,7 +119,6 @@ If you don't have an external graphics card and need to use the integrated one, 
                 <string>Intel UHD Graphics 630</string>
             </dict>
 
-        
 The config.plist file in *EFI-intel630* folder is already set in this way.
 Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* to *EFI*.
 

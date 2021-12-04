@@ -135,7 +135,7 @@ The process is the same for installation and for update:
 
 ### Monterey on the go
 
-Monterey works very well, practically like Big Sur. All hardware works the same as before. Performance of the RX580 card has not changed. Wifi and Bluetooth from the Fenvi T-919 card, Ethernet, sound, sleep, etc. work fine too.
+Monterey works very well. All hardware works the same as in Big Sur. Performance of the RX580 card has not changed. Wifi and Bluetooth from the Fenvi T-919 card, Ethernet, sound, sleep, etc. work fine too.
 
 ### Important!
 

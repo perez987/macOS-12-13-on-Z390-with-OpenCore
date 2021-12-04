@@ -1,7 +1,5 @@
 # macOS Monterey + OpenCore 0.7.6 on Z390 Aorus Elite + RX580
 
-![Neofetch Monterey](neofetch-monterey.png?raw=true)
-
 Updating a Big Sur system to Monterey has been easy and the new system works fine. Pretty much the same setup I use with Big Sur has worked for Monterey. This is a (short) guide using OpenCore 0.7.6.
 
 ### Hardware
@@ -143,3 +141,6 @@ Monterey works very well, practically like Big Sur. All hardware works the same 
 
 1. Do ResetNVRAM the first time you boot a new EFI.
 2. Press spacebar to show auxiliary entries in the picker.
+
+![Neofetch Monterey](neofetch-monterey.png?raw=true)
+

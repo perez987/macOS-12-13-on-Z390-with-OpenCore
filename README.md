@@ -36,8 +36,8 @@ Updating a Big Sur system to Monterey has been easy and the new system works fin
 
 I have used the latest OpenCore version, 0.7.6, with the same settings that I use for Big Sur. For the installation to be successful, 3 parameters related to security must be set:
 
-- SecureBootModel=j160 or Default in config.plist (Apple secure boot corresponds to MacPro7,1 and Default sets the same model as in SMBIOS)
-- SIP enabled (csr-active-config=00000000 in config.plist)
+- `SecureBootModel=j160` or `SecureBootModel=Default` in config.plist (Apple secure boot corresponds to MacPro7,1 and Default sets the same model as in SMBIOS)
+- SIP enabled (`csr-active-config=00000000` in config.plist)
 - Gatekeeper enabled (`sudo spctl --master-enable` in Terminal).
 
 These security options can be changed after installation as they do not are required for Monterey to run.
@@ -62,7 +62,7 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 - SSDT-EC-USBX: fake Embedded Controller on Skylake and later, also fix USB power
 - SSDT-PLUG: power management on Haswell and newer CPUs; to configure the plugin-type=1 parameter on the first processor.
 - SSDT-PMC: native NVRAM support on systems that lack it, for example Z390 chipsets
-- SSDT-USBW: to wake from sleep with a single mouse or keyboard touch (this SSDT works with USBWakeFixup.kext) >> very likely not needed if USB device in DeviceProperties has acpi-wake-type=01.
+- SSDT-USBW: to wake from sleep with a single mouse or keyboard touch (this SSDT works with USBWakeFixup.kext) >> very likely not needed if USB device in DeviceProperties has `acpi-wake-type=01`.
 
 **Drivers**
 
@@ -74,12 +74,13 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 **Tools**
 
 - OpenShell.efi: UEFI shell to perform command line tasks from OpenCore
-config.plist
+
+### config.plist
 
 Settings are generally the same as for Big Sur. Some significant details:
 
-- DeviceProperties> Add> PciRoot(0x0)/Pci(0x14,0x0): acpi-wake-type as data=01, to improve wake from sleep
-- Misc> Boot> PickerAttributes = 144 to enable Flavours system
+- DeviceProperties >> Add >> PciRoot(0x0)/Pci(0x14,0x0): acpi-wake-type as data=01, to improve wake from sleep
+- Misc >> Boot >> PickerAttributes=144 to enable Flavours system
 - NVRAM> 7C436110-AB2A-4BBB-A880-FE41995C9F82> boot-args: alcid=13 for audio (you can also try 11, both layout-id work fine)
 - Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
 
@@ -90,7 +91,7 @@ If you don't have an external graphics card and need to use the integrated one, 
 
 - required: enable iGPU in BIOS (and put it as main card)
 - removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext
-- added in config.plist >> boot-args >> igfxonln=1 -disablegfxfirmware
+- added in config.plist >> boot-args >> `igfxonln=1 -disablegfxfirmware`
 - added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
 
      ```html

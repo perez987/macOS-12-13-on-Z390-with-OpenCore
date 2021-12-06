@@ -91,7 +91,8 @@ If you don't have an external graphics card and need to use the integrated one, 
 
 - Required: enable iGPU in BIOS (and set it as main card)  
 - Removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext  
-- Added in config.plist >> boot-args >> igfxonln=1  added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
+- Added in config.plist >> boot-args >> igfxonln=1
+- Added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
 
      ```html
        <key>PciRoot(0x0)/Pci(0x2,0x0)</key>

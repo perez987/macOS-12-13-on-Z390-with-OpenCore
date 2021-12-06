@@ -89,10 +89,10 @@ Settings are generally the same as for Big Sur. Some significant details:
 I prefer to use MacPro7,1 SMBIOS, it requires iGPU to be disabled in BIOS. This configuration is the one in the *EFI-macpro* folder.
 If you don't have an external graphics card and need to use the integrated one, you have to use iMac19,1 SMBIOS model and *EFI-intel630* folder that has these modifications:
 
-- required: enable iGPU in BIOS (and set it as main card)
-- removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext
-- added in config.plist >> boot-args >> igfxonln=1
-- added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
+1. required: enable iGPU in BIOS (and set it as main card)
+2. removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext
+3. added in config.plist >> boot-args >> igfxonln=1
+4. added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
 
      ```html
        <key>PciRoot(0x0)/Pci(0x2,0x0)</key>

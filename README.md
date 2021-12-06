@@ -1,6 +1,6 @@
-# macOS Monterey + OpenCore 0.7.6 on Z390 Aorus Elite + RX580
+# macOS Monterey or Big Sur + OpenCore 0.7.6 on Z390 Aorus Elite + RX580
 
-Updating a Big Sur system to Monterey has been easy and the new system works fine. Pretty much the same setup I use with Big Sur has worked for Monterey. This is a (short) guide using OpenCore 0.7.6.
+Installing Big Sur and Monterey has been easy on my system. The same setup I use with Big Sur has worked for Monterey. This is a (short) guide using OpenCore 0.7.6.
 
 ### Hardware
 
@@ -126,12 +126,12 @@ Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* 
 
 ### Installing Monterey
 
-The process is the same for installation and for update:
+The process is almost the same for installation and for update:
 
-- A working EFI folder
-- Download macOS 12 from Software Update
-- Run Install macOS Monterey app
-- The update process has a phase on the Big Sur desktop, 2 reboots to boot from Macintosh HD and a third reboot booting from the target disk with Monterey.
+- You need a working EFI folder
+- Download macOS 12 from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info.
+- Run Install macOS Monterey app from Desktop or install program from booted USB
+- The process has 2 reboots to boot from Macintosh HD and a third reboot booting from the target disk with Monterey.
 
 ### Monterey on the go
 

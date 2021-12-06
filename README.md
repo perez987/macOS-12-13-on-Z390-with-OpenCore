@@ -91,7 +91,7 @@ If you don't have an external graphics card and need to use the integrated one, 
 
 1. required: enable iGPU in BIOS (and set it as main card)
 2. removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext
-3. added in config.plist >> boot-args >> `igfxonln=1 -disablegfxfirmware`
+3. added in config.plist >> boot-args >> igfxonln=1
 4. added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
 
      ```html
@@ -124,14 +124,14 @@ If you don't have an external graphics card and need to use the integrated one, 
 The config.plist file in *EFI-intel630* folder is already set in this way.
 Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* to *EFI*.
 
-### Installing Monterey
+### Installing Big Sur or  Monterey
 
 The process is almost the same for installation and for update:
 
 - You need a working EFI folder
-- Download macOS 12 from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info.
-- Run Install macOS Monterey app from Desktop or install program from booted USB
-- The process has 2 reboots to boot from Macintosh HD and a third reboot booting from the target disk with Monterey.
+- Download macOS from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info.
+- Run Install macOS Big Sur / Monterey app from the Desktop or the setup program from the booted USB
+- The process has 2 reboots booting from Macintosh HD and a third reboot booting from the target disk with Monterey.
 
 ### Monterey on the go
 

@@ -87,7 +87,7 @@ Settings are generally the same as for Big Sur. Some significant details:
 ### Intel UHD 630
 
 I prefer to use MacPro7,1 SMBIOS, it requires iGPU to be disabled in BIOS. This configuration is the one in the *EFI-macpro* folder.
-If you don't have an external graphics card and need to use the integrated one, you have to use the *EFI-intel630* folder that has these modifications:
+If you don't have an external graphics card and need to use the integrated one, you have to use iMac19,1 SMBIOS model and *EFI-intel630* folder that has these modifications:
 
 1. required: enable iGPU in BIOS (and set it as main card)
 2. removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext

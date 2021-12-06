@@ -7,6 +7,7 @@ Installing Big Sur and Monterey has been easy on my system. The same setup I use
 - Gigabyte Z390 Aorus Elite motherboard: Realtek ALC1220 audio, Intel I219V Ethernet
 
 - Intel i7 9700 CPU (Intel UHD Graphics 630 iGPU)
+
 - AMD Radeon RX580 8GB graphics card
 - Wifi and Bluetooth Fenvi FV-T919.
 
@@ -22,6 +23,7 @@ Installing Big Sur and Monterey has been easy on my system. The same setup I use
 ### BIOS settings (version F10h)
 
 - CFG Lock: Disabled
+
 - CSM: Disabled
 - VT-d: Disabled
 - Fast Boot: Disabled
@@ -50,6 +52,7 @@ These security options can be changed after installation as they do not are requ
 SMBIOS model that works best on my Monterey system is MacPro7,1. This Mac model requires:
 
 - AMD RX580 dGPU as main card
+
 - Intel 630 iGPU disabled in BIOS
 - RestrictEvents.kext to avoid RAM misconfiguration warnings.
 
@@ -71,6 +74,7 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 **Drivers**
 
 - CrScreenshotDxe.efi: Screenshots in OpenCore
+
 - HfsPlus.efi: to recognize HFS+ devices
 - OpenCanopy.efi: graphical picker with themes
 - OpenRuntime.efi: essential driver to run macOS.
@@ -135,6 +139,7 @@ Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* 
 The process is almost the same for installation and for update:
 
 - You need a working EFI folder
+
 - Download macOS from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info.
 - Run Install macOS Big Sur / Monterey app from the Desktop or the setup program from the booted USB
 - The process has 2 reboots booting from Macintosh HD and a third reboot booting from the target disk with Monterey.

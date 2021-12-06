@@ -5,6 +5,7 @@ Installing Big Sur and Monterey has been easy on my system. The same setup I use
 ### Hardware
 
 - Gigabyte Z390 Aorus Elite motherboard: Realtek ALC1220 audio, Intel I219V Ethernet
+
 - Intel i7 9700 CPU (Intel UHD Graphics 630 iGPU)
 - AMD Radeon RX580 8GB graphics card
 - Wifi and Bluetooth Fenvi FV-T919.
@@ -12,6 +13,7 @@ Installing Big Sur and Monterey has been easy on my system. The same setup I use
 ### What works well?
 
 - Radeon RX580 (VDA decoder fully supported)
+
 - Shutdown, restart and sleep
 - Audio (ALC1220 and HDMI)
 - USB ports (USBMap.kext specific for this motherboard)
@@ -37,6 +39,7 @@ Installing Big Sur and Monterey has been easy on my system. The same setup I use
 I have used the latest OpenCore version, 0.7.6, with the same settings that I use for Big Sur. For the installation to be successful, 3 parameters related to security must be set:
 
 - `SecureBootModel=j160` or `SecureBootModel=Default` in config.plist (Apple secure boot `j160` corresponds to MacPro7,1 and `Default` sets the same model as in SMBIOS)
+
 - SIP enabled (`csr-active-config=00000000` in config.plist)
 - Gatekeeper enabled (`sudo spctl --master-enable` in Terminal).
 
@@ -59,6 +62,7 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 **SSDTs**
 
 - SSDT-AWAC-DISABLE: to fix errors with system clock on Z390, B460, Z490 motherboards
+
 - SSDT-EC-USBX: fake Embedded Controller on Skylake and later, also fix USB power
 - SSDT-PLUG: power management on Haswell and newer CPUs; to configure the plugin-type=1 parameter on the first processor.
 - SSDT-PMC: native NVRAM support on systems that lack it, for example Z390 chipsets
@@ -80,6 +84,7 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 Settings are generally the same as for Big Sur. Some significant details:
 
 - DeviceProperties >> Add >> PciRoot(0x0)/Pci(0x14,0x0): acpi-wake-type as data=01, to improve wake from sleep
+
 - Misc >> Boot >> PickerAttributes=144 to enable Flavours system
 - NVRAM> 7C436110-AB2A-4BBB-A880-FE41995C9F82> boot-args: alcid=13 for audio (you can also try 11, both layout-id work fine)
 - Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
@@ -89,7 +94,8 @@ Settings are generally the same as for Big Sur. Some significant details:
 I prefer to use MacPro7,1 SMBIOS, it requires iGPU to be disabled in BIOS. This configuration is the one in the *EFI-macpro* folder.
 If you don't have an external graphics card and need to use the integrated one, you have to use iMac19,1 SMBIOS model and *EFI-intel630* folder that has these modifications:
 
-- Required: enable iGPU in BIOS (and set it as main card)  
+- Required: enable iGPU in BIOS (and set it as main card)
+
 - Removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext  
 - Added in config.plist >> boot-args >> igfxonln=1
 - Added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.

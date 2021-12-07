@@ -131,7 +131,6 @@ Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* 
 The process is almost the same for installation and for update:
 
 - You need a working EFI folder
-
 - Download macOS from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info
 - Run Install macOS Big Sur / Monterey app from the Desktop or the setup program from the booted USB
 - The process has 2 reboots booting from Macintosh HD and a third reboot booting from the target disk with Monterey.
@@ -143,7 +142,6 @@ Both macOS versions work very well. All hardware works fine. Performance of the 
 ### Important!
 
 1. Do ResetNVRAM the first time you boot a new EFI.
-
 2. Press spacebar to show auxiliary entries in the picker.
 
 ![Neofetch Monterey](neofetch-monterey.png?raw=true)

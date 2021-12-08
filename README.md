@@ -144,5 +144,5 @@ Both macOS versions work very well. All hardware works fine. Performance of the 
 1. Do ResetNVRAM the first time you boot a new EFI.
 2. Press spacebar to show auxiliary entries in the picker.
 
-![Neofetch Monterey](neofetch-monterey.png?raw=true)
+![Monterey](Monterey.jpg?raw=true)
 

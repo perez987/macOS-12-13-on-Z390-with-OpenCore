@@ -135,10 +135,6 @@ The process is almost the same for installation and for update:
 - Run Install macOS Big Sur / Monterey app from the Desktop or the setup program from the booted USB
 - The process has 2 reboots booting from Macintosh HD and a third reboot booting from the target disk with Monterey.
 
-### Monterey and Big Sur on the go
-
-Both macOS versions work very well. All hardware works fine. Performance of the RX580 card is the same. Wifi and Bluetooth (Fenvi T-919), Ethernet, sound, sleep, etc. work fine too.
-
 ### Important!
 
 1. Do ResetNVRAM the first time you boot a new EFI.

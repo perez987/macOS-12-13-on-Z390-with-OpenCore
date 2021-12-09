@@ -96,7 +96,6 @@ If you don't have an external graphics card and need to use the integrated one, 
 
 Code:
 
-     ```xml
        <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
         <dict>
             <key>AAPL,ig-platform-id</key>
@@ -122,7 +121,7 @@ Code:
             <key>name</key>
             <string>Intel UHD Graphics 630</string>
         </dict>
-        ```
+       
 The config.plist file in *EFI-intel630* folder is already set in this way.
 Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* to *EFI*.
 

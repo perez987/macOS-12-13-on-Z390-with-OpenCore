@@ -122,7 +122,7 @@ Code:
             <key>name</key>
             <string>Intel UHD Graphics 630</string>
         </dict>
-
+        ```
 The config.plist file in *EFI-intel630* folder is already set in this way.
 Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* to *EFI*.
 

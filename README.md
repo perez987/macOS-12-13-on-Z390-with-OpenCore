@@ -93,6 +93,32 @@ If you don't have an external graphics card and need to use the integrated one, 
 - Removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext
 - Added in config.plist >> boot-args >> igfxonln=1
 - Added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
+
+       <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+        <dict>
+            <key>AAPL,ig-platform-id</key>
+            <data>BwCbPg==</data>
+            <key>framebuffer-patch-enable</key>
+            <data>AQAAAA==</data>
+            <key>framebuffer-con0-enable</key>
+            <data>AQAAAA==</data>
+            <key>framebuffer-con1-enable</key>
+            <data>AQAAAA==</data>
+            <key>framebuffer-con2-enable</key>
+            <data>AQAAAA==</data>
+            <key>framebuffer-con0-alldata</key>
+            <data>AQAJAAAEAADHAwAA</data>
+            <key>framebuffer-con1-alldata</key>
+            <data>AgAKAAAEAADHAwAA</data>
+            <key>framebuffer-con2-alldata</key>
+            <data>AwQIAAAIAADHAwAA</data>
+            <key>framebuffer-stolenmem</key>
+            <data>AAAwAQ==</data>
+            <key>hda-gfx</key>
+            <string>onboard-1</string>
+            <key>name</key>
+            <string>Intel UHD Graphics 630</string>
+        </dict>
       
 The config.plist file in *EFI-intel630* folder is already set in this way.
 Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* to *EFI*.

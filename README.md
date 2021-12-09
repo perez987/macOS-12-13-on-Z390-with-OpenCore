@@ -96,7 +96,7 @@ If you don't have an external graphics card and need to use the integrated one, 
 
 Code:
 
-     ```html
+     ```xml
        <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
         <dict>
             <key>AAPL,ig-platform-id</key>

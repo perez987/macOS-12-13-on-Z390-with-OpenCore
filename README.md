@@ -30,11 +30,6 @@ Installing Big Sur and Monterey has been easy on my system. The same setup I use
 </tr>
 </table>
 
-- Gigabyte Z390 Aorus Elite motherboard: Realtek ALC1220 audio, Intel I219V Ethernet
-- Intel i7 9700 CPU (Intel UHD Graphics 630 iGPU)
-- AMD Radeon RX580 8GB graphics card
-- Wifi and Bluetooth Fenvi FV-T919.
-
 ### What works well?
 
 - Radeon RX580 (VDA decoder fully supported)

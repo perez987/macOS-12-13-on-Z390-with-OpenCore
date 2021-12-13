@@ -6,6 +6,30 @@ Installing Big Sur and Monterey has been easy on my system. The same setup I use
 
 ### Hardware
 
+<table>
+<tr>
+<td>Gigabyte Z390 Aorus Elite motherboard</td>
+</tr>
+<tr>
+<td>Realtek ALC1220 audio</td>
+</tr>
+<tr>
+<td>Intel I219V Ethernet</td>
+</tr>
+<tr>
+<td>Intel i7 9700 CPU</td>
+</tr>
+<tr>
+<td>Intel UHD Graphics 630 iGPU</td>
+</tr>
+<tr>
+<td>AMD Radeon RX580 8GB dGPU</td>
+</tr>
+<tr>
+<td>Fenvi FV-T919 wifi and Bluetooth</td>
+</tr>
+</table>
+
 - Gigabyte Z390 Aorus Elite motherboard: Realtek ALC1220 audio, Intel I219V Ethernet
 - Intel i7 9700 CPU (Intel UHD Graphics 630 iGPU)
 - AMD Radeon RX580 8GB graphics card

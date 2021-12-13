@@ -1,6 +1,6 @@
 ![macOS](https://badgen.net/github/checks/node-formidable/node-formidable/master/macos) ![License](https://badgen.net/badge/license/MIT/blue)
 
-# macOS Monterey or Big Sur + OpenCore 0.7.6 on Z390 Aorus Elite + RX580
+# macOS Monterey or Big Sur with OpenCore 0.7.6 on Z390 Aorus Elite motherboard (AMD RX580 ot Intel UHD 630)
 
 <table>
 <tr>

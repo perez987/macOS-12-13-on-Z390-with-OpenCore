@@ -4,7 +4,7 @@
 
 <table>
 <tr>
-       <td><img src="Apple12.png" alt="Monterey HDD" width=256px height=256px></td>
+       <td width=272px><img src="Apple12.png" alt="Monterey HDD" width=256px height=256px></td>
        <td>Installing Big Sur and Monterey has been easy on my system. The same setup I use with Big Sur has worked for Monterey. This is a (short) guide using OpenCore 0.7.6.</td>
 </tr>
 </table>

@@ -110,11 +110,6 @@ If you don't have an external graphics card and need to use the integrated one, 
 <tr><td>Added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected</td></tr>
 </table>
 
-- Required: enable iGPU in BIOS (and set it as main card)
-- Removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext
-- Added in config.plist >> boot-args >> igfxonln=1
-- Added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected.
-
        <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
         <dict>
             <key>AAPL,ig-platform-id</key>

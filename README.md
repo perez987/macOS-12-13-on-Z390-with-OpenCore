@@ -37,11 +37,23 @@
 
 ### What works well?
 
-- Radeon RX580 (VDA decoder fully supported)
-- Shutdown, restart and sleep
-- Audio (ALC1220 and HDMI)
-- USB ports (USBMap.kext specific for this motherboard)
-- Airdrop, iMessage.
+<table>
+<tr>
+<td>Radeon RX580 (VDA decoder fully supported)</td>
+</tr>
+<tr>
+<td>Shutdown, restart and sleep</td>
+</tr>
+<tr>
+<td>Audio (ALC1220 and HDMI)</td>
+</tr>
+<tr>
+<td>USB ports (USBMap.kext for this motherboard)</td>
+</tr>
+<tr>
+<td>Airdrop, iMessage</td>
+</tr>
+</table>
 
 ### BIOS settings (version F10h)
 

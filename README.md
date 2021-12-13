@@ -1,76 +1,50 @@
 ![macOS](https://badgen.net/github/checks/node-formidable/node-formidable/master/macos) ![License](https://badgen.net/badge/license/MIT/blue)
 
-# macOS Monterey or Big Sur with OpenCore 0.7.6 on Z390 Aorus Elite motherboard (AMD RX580 ot Intel UHD 630)
+# macOS Monterey or Big Sur with OpenCore 0.7.6 on Z390 Aorus Elite motherboard (AMD RX580 or Intel UHD 630)
 
 <table>
-<tr>
-       <td align=center width=272px height=272px><img src="Apple12.png" alt="Monterey HDD"></td>
-       </tr>
-       <tr>
-       <td>Installing Big Sur and Monterey has been easy on my system. The same setup I use with Big Sur has worked for Monterey. This is a (short) guide using OpenCore 0.7.6. Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</td>
-</tr>
+<tr><td align=center width=272px height=272px><img src="Apple12.png" alt="Monterey HDD"></td></tr>
+<tr><td>Installing Big Sur and Monterey has been easy on my system. The same setup I use with Big Sur has worked for Monterey. This is a (short) guide using OpenCore 0.7.6. Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</td></tr>
 </table>
 
 ### Hardware
 
 <table>
-<tr>
-<td>Gigabyte Z390 Aorus Elite motherboard</td>
-</tr>
-<tr>
-<td>Realtek ALC1220 audio</td>
-</tr>
-<tr>
-<td>Intel I219V Ethernet</td>
-</tr>
-<tr>
-<td>Intel i7 9700 CPU</td>
-</tr>
-<tr>
-<td>Intel UHD Graphics 630 iGPU</td>
-</tr>
-<tr>
-<td>AMD Radeon RX580 8GB dGPU</td>
-</tr>
-<tr>
-<td>Fenvi FV-T919 wifi and Bluetooth</td>
-</tr>
+<tr><td>Gigabyte Z390 Aorus Elite motherboard</td></tr>
+<tr><td>Realtek ALC1220 audio</td></tr>
+<tr><td>Intel I219V Ethernet</td></tr>
+<tr><td>Intel i7 9700 CPU</td></tr>
+<tr><td>Intel UHD Graphics 630 iGPU</td></tr>
+<tr><td>AMD Radeon RX580 8GB dGPU</td></tr>
+<tr><td>Fenvi FV-T919 wifi and Bluetooth</td></tr>
 </table>
 
 ### What works well?
 
 <table>
-<tr>
-<td>Radeon RX580 (VDA decoder fully supported)</td>
-</tr>
-<tr>
-<td>Shutdown, restart and sleep</td>
-</tr>
-<tr>
-<td>Audio (ALC1220 and HDMI)</td>
-</tr>
-<tr>
-<td>USB ports (USBMap.kext for this motherboard)</td>
-</tr>
-<tr>
-<td>Airdrop, iMessage</td>
-</tr>
+<tr><td>Radeon RX580 (VDA decoder fully supported)</td></tr>
+<tr><td>Shutdown, restart and sleep</td></tr>
+<tr><td>Audio (ALC1220 and HDMI)</td></tr>
+<tr><td>USB ports (USBMap.kext for this motherboard)</td></tr>
+<tr><td>Airdrop, iMessage</td></tr>
 </table>
 
 ### BIOS settings (version F10h)
 
-- CFG Lock: Disabled
-- CSM: Disabled
-- VT-d: Disabled
-- Fast Boot: Disabled
-- OS Type: Windows 8/10
-- Platform Power Management: Disabled
-- XHCI Hand-Off: Enabled
-- Network Stack: Disabled
-- Wake on LAN: Disabled
-- Secure Boot: Disabled
-- DVMT Pre-Allocated: 256M or higher
-- Integrated Graphics: Disabled / Enabled (according to SMBIOS).
+<table>
+<tr><td>CFG Lock: Disabled</td></tr>
+<tr><td>CSM: Disabled</td></tr>
+<tr><td>VT-d: Disabled</td></tr>
+<tr><td>Fast Boot: Disabled</td></tr>
+<tr><td>OS Type: Windows 8/10 WHQL</td></tr>
+<tr><td>Platform Power Management: Disabled</td></tr>
+<tr><td>XHCI Hand-Off: Enabled</td></tr>
+<tr><td>Network Stack: Disabled</td></tr>
+<tr><td>Wake on LAN: Disabled</td></tr>
+<tr><td>Secure Boot: Disabled</td></tr>
+<tr><td>DVMT Pre-Allocated: 256M or higher</td></tr>
+<tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
+</table>
 
 ### OpenCore 0.7.6
 

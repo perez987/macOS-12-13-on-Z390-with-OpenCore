@@ -1,8 +1,5 @@
 # macOS Monterey or Big Sur + OpenCore 0.7.6 on Z390 Aorus Elite + RX580
 
-https://badgen.net/github/checks/node-formidable/node-formidable/master/macos
-/npm/l/:packageName?registry_uri=https%3A%2F%2Fregistry.npmjs.com
-
 Installing Big Sur and Monterey has been easy on my system. The same setup I use with Big Sur has worked for Monterey. This is a (short) guide using OpenCore 0.7.6.
 
 ### Hardware

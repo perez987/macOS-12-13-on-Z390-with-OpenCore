@@ -50,13 +50,6 @@
 
 I have used the latest OpenCore version, 0.7.6, with the same settings that I use for Big Sur. For the installation to be successful, 3 parameters related to security must be set:
 
-<table>
-       <tr><td>`SecureBootModel=j160` or `SecureBootModel=Default` in config.plist (Apple secure boot `j160` corresponds to MacPro7,1 and `Default` sets the same model as in SMBIOS)</td></tr>
-       <tr><td>SIP enabled (`csr-active-config=00000000` in config.plist)</td></tr>
-       <tr><td>Gatekeeper enabled (`sudo spctl --master-enable` in Terminal)</td></tr>
-</table>
-
-
 - `SecureBootModel=j160` or `SecureBootModel=Default` in config.plist (Apple secure boot `j160` corresponds to MacPro7,1 and `Default` sets the same model as in SMBIOS)
 - SIP enabled (`csr-active-config=00000000` in config.plist)
 - Gatekeeper enabled (`sudo spctl --master-enable` in Terminal).
@@ -109,6 +102,13 @@ Settings are generally the same as for Big Sur. Some significant details:
 
 I prefer to use MacPro7,1 SMBIOS, it requires iGPU to be disabled in BIOS. This configuration is the one in the *EFI-macpro* folder.
 If you don't have an external graphics card and need to use the integrated one, you have to use iMac19,1 SMBIOS model and *EFI-intel630* folder that has these modifications:
+
+<table>
+<tr><td>Enable iGPU in BIOS (and set it as main card)</td></tr>
+<tr><td>Removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext</td></tr>
+<tr><td>Added in config.plist >> boot-args >> igfxonln=1</td></tr>
+<tr><td>Added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected</td></tr>
+</table>
 
 - Required: enable iGPU in BIOS (and set it as main card)
 - Removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext

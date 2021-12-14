@@ -152,4 +152,3 @@ The process is almost the same for installation and for update:
 
 1. Do ResetNVRAM the first time you boot a new EFI.
 2. Press spacebar to show auxiliary entries in the picker.
-3. 

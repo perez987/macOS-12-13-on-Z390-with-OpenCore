@@ -11,12 +11,12 @@
 
 <table>
        <tr><td>Motherboard</td><td>Gigabyte Z390 Aorus Elite</td></tr>
-       <tr><td>Sound<tr><td>Realtek ALC1220</td></tr>
-       <tr><td>Ethernet<tr><td>Intel I219V</td></tr>
-       <tr><td>CPU<tr><td>Intel i7 9700</td></tr>
-       <tr><td>iGPU<tr><td>Intel UHD Graphics 630</td></tr>
-       <tr><td>dGPU<tr><td>AMD Radeon RX580 8GB</td></tr>
-       <tr><td>Wifi + BT<tr><td>Fenvi FV-T919 BCM94360CD</td></tr>
+       <tr><td>Sound</td></td><td>Realtek ALC1220</td></tr>
+       <tr><td>Ethernet</td><td>Intel I219V7</td></tr>
+       <tr><td>CPU</td><td>Intel i7 9700</td></tr>
+       <tr><td>iGPU</td><td>Intel UHD Graphics 630</td></tr>
+       <tr><td>dGPU</td><td>AMD Radeon RX580 8GB</td></tr>
+       <tr><td>Wifi + BT</td><td>Fenvi FV-T919 BCM94360CD</td></tr>
 </table>
 
 ### What works well?

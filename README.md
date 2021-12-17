@@ -10,13 +10,13 @@
 ### Hardware
 
 <table>
-<tr><td>Gigabyte Z390 Aorus Elite motherboard</td></tr>
-<tr><td>Realtek ALC1220 audio</td></tr>
-<tr><td>Intel I219V Ethernet</td></tr>
-<tr><td>Intel i7 9700 CPU</td></tr>
-<tr><td>Intel UHD Graphics 630 iGPU</td></tr>
-<tr><td>AMD Radeon RX580 8GB dGPU</td></tr>
-<tr><td>Fenvi FV-T919 wifi and Bluetooth</td></tr>
+       <tr><td>Motherboard</td><td>Gigabyte Z390 Aorus Elite</td></tr>
+       <tr><td>Sound<tr><td>Realtek ALC1220</td></tr>
+       <tr><td>Ethernet<tr><td>Intel I219V</td></tr>
+       <tr><td>CPU<tr><td>Intel i7 9700</td></tr>
+       <tr><td>iGPU<tr><td>Intel UHD Graphics 630</td></tr>
+       <tr><td>dGPU<tr><td>AMD Radeon RX580 8GB</td></tr>
+       <tr><td>Wifi + BT<tr><td>Fenvi FV-T919 BCM94360CD</td></tr>
 </table>
 
 ### What works well?

@@ -4,7 +4,7 @@
 
 <table>
 <tr><td align=center width=272px height=272px><img src="Apple12.png" alt="Monterey HDD"></td></tr>
-<tr><td>Installing Big Sur and Monterey has been easy on my system. The same setup I use with Big Sur has worked for Monterey. This is a (short) guide using OpenCore 0.7.6. Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</td></tr>
+<tr><td>EFI and guide using OpenCore 0.7.6 for Big Sur and Monterey on Gigabyte Z390 Aorus Elite motherboard. The same setup I use with Big Sur also works for Monterey. Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</td></tr>
 </table>
 
 ### Hardware

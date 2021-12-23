@@ -152,3 +152,12 @@ The process is almost the same for installation and for update:
 
 1. Do ResetNVRAM the first time you boot a new EFI.
 2. Press spacebar to show auxiliary entries in the picker.
+
+### Credits
+
+<table>
+       <tr><td><a href=https://github.com/acidanthera target=_blank>Acidanthera</a></td><td>OpenCore and kexts</td></tr>
+<tr><td><a href=https://dortania.github.io target=_blank>Dortania</a></td><td>OpenCore guides</td></tr>
+<tr><td><a href=https://www.insanelymac.com/forum/ target=_blank>InsanelyMac</a></td><td>Hackintosh forum</td></tr>
+<tr><td><a href=https://www.tonymacx86.com target=_blank>tonymacx86</a></td><td>Hackintosh forum</td></tr>
+</table>

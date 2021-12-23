@@ -3,7 +3,7 @@
 # macOS Monterey or Big Sur with OpenCore 0.7.6 on Z390 Aorus Elite motherboard (AMD RX580 or Intel UHD 630)
 
 <table>
-<tr><td align=center width=272px height=272px><img src="img/Apple12.png" alt="Monterey HDD"></td></tr>
+<tr><td align=center width=272px height=272px><img src="Apple12.png" alt="Monterey HDD"></td></tr>
 <tr><td><b>EFI and guide using OpenCore 0.7.6 for Big Sur and Monterey on Gigabyte Z390 Aorus Elite motherboard. The same setup I use with Big Sur also works for Monterey. Settings for AMD dGPU as main card or iGPU as single card. EFI folders available.</b></td></tr>
 </table>
 

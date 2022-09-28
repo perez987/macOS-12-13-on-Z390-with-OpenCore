@@ -95,48 +95,74 @@ Settings are generally the same as for Big Sur. Some significant details:
 
 - DeviceProperties >> Add >> PciRoot(0x0)/Pci(0x14,0x0): acpi-wake-type as data=01, to improve wake from sleep
 - Misc >> Boot >> PickerAttributes=144 to enable Flavours system
-- NVRAM> 7C436110-AB2A-4BBB-A880-FE41995C9F82> boot-args: alcid=13 for audio (you can also try 11, both layout-id work fine)
+- NVRAM> 7C436110-AB2A-4BBB-A880-FE41995C9F82> boot-args: alcid=7
 - Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
 
 ### Intel UHD 630
 
 I prefer to use MacPro7,1 SMBIOS, it requires iGPU to be disabled in BIOS. This configuration is the one in the *EFI-macpro* folder.
-If you don't have an external graphics card and need to use the integrated one, you have to use iMac19,1 SMBIOS model and *EFI-intel630* folder that has these modifications:
+If you don't have an external graphics card and need to use the integrated one, you have to use iMac19,1 SMBIOS model, *EFI-intel630* folder that has these modifications:
 
 <table>
 <tr><td>Enable iGPU in BIOS (and set it as main card)</td></tr>
 <tr><td>Removed RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext</td></tr>
-<tr><td>Added in config.plist >> boot-args >> igfxonln=1</td></tr>
-<tr><td>Added in config.plist >> DeviceProperties >> code to patch the framebuffer so that the iGPU is well detected</td></tr>
+<tr><td>Added in config.plist >> DeviceProperties >> code to patch the framebuffer and other properties so that the iGPU is well detected</td></tr>
 </table>
 
-       <key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-        <dict>
-            <key>AAPL,ig-platform-id</key>
-            <data>BwCbPg==</data>
-            <key>framebuffer-patch-enable</key>
-            <data>AQAAAA==</data>
-            <key>framebuffer-con0-enable</key>
-            <data>AQAAAA==</data>
-            <key>framebuffer-con1-enable</key>
-            <data>AQAAAA==</data>
-            <key>framebuffer-con2-enable</key>
-            <data>AQAAAA==</data>
-            <key>framebuffer-con0-alldata</key>
-            <data>AQAJAAAEAADHAwAA</data>
-            <key>framebuffer-con1-alldata</key>
-            <data>AgAKAAAEAADHAwAA</data>
-            <key>framebuffer-con2-alldata</key>
-            <data>AwQIAAAIAADHAwAA</data>
-            <key>framebuffer-stolenmem</key>
-            <data>AAAwAQ==</data>
-            <key>hda-gfx</key>
-            <string>onboard-1</string>
-            <key>name</key>
-            <string>Intel UHD Graphics 630</string>
-        </dict>
+			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>BwCbPg==</data>
+				<key>device-id</key>
+				<data>mz4AAA==</data>
+				<key>device_type</key>
+				<string>VGA compatible controller</string>
+				<key>enable-hdmi20</key>
+				<data>AQAAAA==</data>
+				<key>enable-metal</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con0-busid</key>
+				<data>AAAAAA==</data>
+				<key>framebuffer-con0-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con0-pipe</key>
+				<data>EgAAAA==</data>
+				<key>framebuffer-con1-busid</key>
+				<data>AAAAAA==</data>
+				<key>framebuffer-con1-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con1-pipe</key>
+				<data>EgAAAA==</data>
+				<key>framebuffer-con2-busid</key>
+				<data>BAAAAA==</data>
+				<key>framebuffer-con2-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-con2-pipe</key>
+				<data>EgAAAA==</data>
+				<key>framebuffer-con2-type</key>
+				<data>AAgAAA==</data>
+				<key>framebuffer-patch-enable</key>
+				<data>AQAAAA==</data>
+				<key>framebuffer-stolenmem</key>
+				<data>AAAwAQ==</data>
+				<key>hda-gfx</key>
+				<string>onboard-1</string>
+				<key>igfxfw</key>
+				<data>AgAAAA==</data>
+				<key>force-online</key>
+				<data>AQAAAA==</data>
+				<key>rps-control</key>
+				<data>AQAAAA==</data>
+			</dict>
       
+<details>
+<summary>Image: iGPU as main card</summary>
+<br>
+<img src="img/iGPU as main card.png">
+</details>
+
 The config.plist file in *EFI-intel630* folder is already set in this way.
+
 Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* to *EFI*.
 
 ### Installing Big Sur or  Monterey
@@ -156,7 +182,7 @@ The process is almost the same for installation and for update:
 ### Credits
 
 <table>
-       <tr><td><a href=https://github.com/acidanthera target=_blank>Acidanthera</a></td><td>OpenCore and kexts</td></tr>
+<tr><td><a href=https://github.com/acidanthera target=_blank>Acidanthera</a></td><td>OpenCore and kexts</td></tr>
 <tr><td><a href=https://dortania.github.io target=_blank>Dortania</a></td><td>OpenCore guides</td></tr>
 <tr><td><a href=https://www.insanelymac.com/forum/ target=_blank>InsanelyMac</a></td><td>Hackintosh forum</td></tr>
 <tr><td><a href=https://www.tonymacx86.com target=_blank>tonymacx86</a></td><td>Hackintosh forum</td></tr>

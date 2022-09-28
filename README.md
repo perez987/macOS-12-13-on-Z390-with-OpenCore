@@ -1,6 +1,6 @@
 ![macOS](https://badgen.net/github/checks/node-formidable/node-formidable/master/macos) ![License](https://badgen.net/badge/license/MIT/blue)
 
-# macOS Monterey or Big Sur with OpenCore 0.7.6 on Z390 Aorus Elite motherboard (AMD RX580 or Intel UHD 630)
+# macOS Monterey or Big Sur with OpenCore 0.7.6 on Z390 Aorus Elite motherboard (AMD RX 580 or Intel UHD 630)
 
 <table>
 <tr><td align=center width=272px height=272px><img src="Apple12.png" alt="Monterey HDD"></td></tr>
@@ -15,14 +15,14 @@
        <tr><td>Ethernet</td><td>Intel I219V7</td></tr>
        <tr><td>CPU</td><td>Intel i7 9700</td></tr>
        <tr><td>iGPU</td><td>Intel UHD Graphics 630</td></tr>
-       <tr><td>dGPU</td><td>AMD Radeon RX580 8GB</td></tr>
+       <tr><td>dGPU</td><td>AMD Radeon RX 580 8GB</td></tr>
        <tr><td>Wifi + BT</td><td>Fenvi FV-T919 BCM94360CD</td></tr>
 </table>
 
 ### What works well?
 
 <table>
-<tr><td>Radeon RX580 (VDA decoder fully supported)</td></tr>
+<tr><td>Radeon RX 580 (VDA decoder fully supported)</td></tr>
 <tr><td>Shutdown, restart and sleep</td></tr>
 <tr><td>Audio (ALC1220 and HDMI)</td></tr>
 <tr><td>USB ports (USBMap.kext for this motherboard)</td></tr>
@@ -60,7 +60,7 @@ These security options can be changed after installation as they do not are requ
 
 SMBIOS model that works best on my Monterey system is MacPro7,1. This Mac model requires:
 
-- AMD RX580 dGPU as main card
+- AMD RX 580 dGPU as main card
 - Intel 630 iGPU disabled in BIOS
 - RestrictEvents.kext to avoid RAM misconfiguration warnings.
 

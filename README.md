@@ -158,7 +158,7 @@ If you don't have an external graphics card and need to use the integrated one, 
 <details>
 <summary>Image: iGPU as main card</summary>
 <br>
-<img src="img/iGPU as main card.png">
+<img src="iGPU as main card.png">
 </details>
 
 The config.plist file in *EFI-intel630* folder is already set in this way.

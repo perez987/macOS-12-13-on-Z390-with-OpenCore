@@ -1,10 +1,10 @@
 ![macOS](https://badgen.net/github/checks/node-formidable/node-formidable/master/macos) ![License](https://badgen.net/badge/license/MIT/blue)
 
-# macOS Monterey or Big Sur with OpenCore 0.7.6 on Z390 Aorus Elite motherboard (AMD RX 580 or Intel UHD 630)
+# macOS Monterey / Big Sur / Ventura with OpenCore 0.8.5 on Z390 Aorus Elite motherboard (AMD ~~RX 580~~ RX 6600 or Intel UHD 630)
 
 <table>
-<tr><td align=center width=272px height=272px><img src="Apple12.png" alt="Monterey HDD"></td></tr>
-<tr><td><b>EFI and guide using OpenCore 0.7.6 for Big Sur and Monterey on Gigabyte Z390 Aorus Elite motherboard. The same setup I use with Big Sur also works for Monterey. Settings for AMD dGPU as main card or iGPU as single card. EFI folders available.</b></td></tr>
+<tr><td align=center width=272px height=272px><img src="macOS13.png" alt="Monterey HDD"></td></tr>
+<tr><td><b>EFI and guide using OpenCore 0.8.5 for Big Sur, Monterey and Ventura on Gigabyte Z390 Aorus Elite motherboard. The same setup I use with Big Sur also works for Monterey (Ventura has differences). Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</b></td></tr>
 </table>
 
 ### Hardware
@@ -15,17 +15,17 @@
        <tr><td>Ethernet</td><td>Intel I219V7</td></tr>
        <tr><td>CPU</td><td>Intel i7 9700</td></tr>
        <tr><td>iGPU</td><td>Intel UHD Graphics 630</td></tr>
-       <tr><td>dGPU</td><td>AMD Radeon RX 580 8GB</td></tr>
+       <tr><td>dGPU</td><td>AMD Radeon <s>RX 580 8GB</s> RX 6600 8GB</td></tr>
        <tr><td>Wifi + BT</td><td>Fenvi FV-T919 BCM94360CD</td></tr>
 </table>
 
 ### What works well?
 
 <table>
-<tr><td>Radeon RX 580 (VDA decoder fully supported)</td></tr>
+<tr><td>Radeon graphics card (VDA decoder fully supported)</td></tr>
 <tr><td>Shutdown, restart and sleep</td></tr>
 <tr><td>Audio (ALC1220 and HDMI)</td></tr>
-<tr><td>USB ports (USBMap.kext for this motherboard)</td></tr>
+<tr><td>USB ports (USB ports map for this motherboard)</td></tr>
 <tr><td>Airdrop, iMessage</td></tr>
 </table>
 
@@ -46,23 +46,30 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
-### OpenCore 0.7.6
+### OpenCore 0.8.5
 
-I have used the latest OpenCore version, 0.7.6, with the same settings that I use for Big Sur. For the installation to be successful, 3 parameters related to security must be set:
+I have used OpenCore version 0.8.5. For the installation to be successful, 3 parameters related to security must be set:
 
 - `SecureBootModel=j160` or `SecureBootModel=Default` in config.plist (Apple secure boot `j160` corresponds to MacPro7,1 and `Default` sets the same model as in SMBIOS)
 - SIP enabled (`csr-active-config=00000000` in config.plist)
 - Gatekeeper enabled (`sudo spctl --master-enable` in Terminal).
 
-These security options can be changed after installation as they do not are required for Monterey to run.
+These security options can be changed after installation as they do not are required for Big Sur / Monterey / Ventura to run.
 
 ### SMBIOS
 
-SMBIOS model that works best on my Monterey system is MacPro7,1. This Mac model requires:
+SMBIOS model that works best on my systems is iMac19,1. This Mac model requires:
 
-- AMD RX 580 dGPU as main card
+- AMD dGPU as main card
+- Intel 630 iGPU enabled in BIOS
+- iGPU code for headless mode in config.plist.
+
+MacPro7,1 SMBIOS can be set if desired. It works also very well. This Mac model requires:
+
+- AMD dGPU as main card
 - Intel 630 iGPU disabled in BIOS
-- RestrictEvents.kext to avoid RAM misconfiguration warnings.
+- RestrictEvents.kext to avoid RAM misconfiguration warnings
+- CPUFriend.kext: not mandatory but in my opinion it improves CPU Power Management.
 
 ### CPUFriend.kext
 
@@ -80,10 +87,10 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 
 **Drivers**
 
-- CrScreenshotDxe.efi: Screenshots in OpenCore
 - HfsPlus.efi: to recognize HFS+ devices
+- OpenRuntime.efi: essential driver to run macOS
 - OpenCanopy.efi: graphical picker with themes
-- OpenRuntime.efi: essential driver to run macOS.
+- CrScreenshotDxe.efi: Screenshots in OpenCore.
 
 **Tools**
 
@@ -95,75 +102,101 @@ Settings are generally the same as for Big Sur. Some significant details:
 
 - DeviceProperties >> Add >> PciRoot(0x0)/Pci(0x14,0x0): acpi-wake-type as data=01, to improve wake from sleep
 - Misc >> Boot >> PickerAttributes=144 to enable Flavours system
-- NVRAM> 7C436110-AB2A-4BBB-A880-FE41995C9F82> boot-args: alcid=7
+- NVRAM> 7C436110-AB2A-4BBB-A880-FE41995C9F82> boot-args: `alcid=7 agdpmod=pikera`
+	(`agdpmod=pikera` not needed with RX 580, only with RX 6600 and other Navi cards)
 - Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
 
 ### Intel UHD 630
 
-I prefer to use MacPro7,1 SMBIOS, it requires iGPU to be disabled in BIOS. This configuration is the one in the *EFI-macpro* folder.
-If you don't have an external graphics card and need to use the integrated one, you have to use iMac19,1 SMBIOS model, *EFI-intel630* folder that has these modifications:
+If you don't have an external graphics card and need to use the iGPU as single card, you have to use iMac19,1 SMBIOS with code in config.plist to patch the framebuffer and other properties so that the iGPU is well detected:
 
-<table>
-<tr><td>Enable iGPU in BIOS (and set it as main card)</td></tr>
-<tr><td>Remove RestrictEvents.kext, CPUFriendDataProvider.kext and CPUFriend.kext</td></tr>
-<tr><td>Adde in config.plist >> DeviceProperties >> code to patch the framebuffer and other properties so that the iGPU is well detected</td></tr>
-</table>
-
-			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-			<dict>
-				<key>AAPL,ig-platform-id</key>
-				<data>BwCbPg==</data>
-				<key>device-id</key>
-				<data>mz4AAA==</data>
-				<key>device_type</key>
-				<string>VGA compatible controller</string>
-				<key>enable-hdmi20</key>
-				<data>AQAAAA==</data>
-				<key>enable-metal</key>
-				<data>AQAAAA==</data>
-				<key>framebuffer-con0-busid</key>
-				<data>AAAAAA==</data>
-				<key>framebuffer-con0-enable</key>
-				<data>AQAAAA==</data>
-				<key>framebuffer-con0-pipe</key>
-				<data>EgAAAA==</data>
-				<key>framebuffer-con1-busid</key>
-				<data>AAAAAA==</data>
-				<key>framebuffer-con1-enable</key>
-				<data>AQAAAA==</data>
-				<key>framebuffer-con1-pipe</key>
-				<data>EgAAAA==</data>
-				<key>framebuffer-con2-busid</key>
-				<data>BAAAAA==</data>
-				<key>framebuffer-con2-enable</key>
-				<data>AQAAAA==</data>
-				<key>framebuffer-con2-pipe</key>
-				<data>EgAAAA==</data>
-				<key>framebuffer-con2-type</key>
-				<data>AAgAAA==</data>
-				<key>framebuffer-patch-enable</key>
-				<data>AQAAAA==</data>
-				<key>framebuffer-stolenmem</key>
-				<data>AAAwAQ==</data>
-				<key>hda-gfx</key>
-				<string>onboard-1</string>
-				<key>igfxfw</key>
-				<data>AgAAAA==</data>
-				<key>force-online</key>
-				<data>AQAAAA==</data>
-				<key>rps-control</key>
-				<data>AQAAAA==</data>
-			</dict>
-      
+``` xml
+	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+	<dict>
+		<key>AAPL,ig-platform-id</key>
+		<data>BwCbPg==</data>
+		<key>device-id</key>
+		<data>mz4AAA==</data>
+		<key>device_type</key>
+		<string>VGA compatible controller</string>
+		<key>enable-hdmi20</key>
+		<data>AQAAAA==</data>
+		<key>enable-metal</key>
+		<data>AQAAAA==</data>
+		<key>framebuffer-con0-busid</key>
+		<data>AAAAAA==</data>
+		<key>framebuffer-con0-enable</key>
+		<data>AQAAAA==</data>
+		<key>framebuffer-con0-pipe</key>
+		<data>EgAAAA==</data>
+		<key>framebuffer-con1-busid</key>
+		<data>AAAAAA==</data>
+		<key>framebuffer-con1-enable</key>
+		<data>AQAAAA==</data>
+		<key>framebuffer-con1-pipe</key>
+		<data>EgAAAA==</data>
+		<key>framebuffer-con2-busid</key>
+		<data>BAAAAA==</data>
+		<key>framebuffer-con2-enable</key>
+		<data>AQAAAA==</data>
+		<key>framebuffer-con2-pipe</key>
+		<data>EgAAAA==</data>
+		<key>framebuffer-con2-type</key>
+		<data>AAgAAA==</data>
+		<key>framebuffer-patch-enable</key>
+		<data>AQAAAA==</data>
+		<key>framebuffer-stolenmem</key>
+		<data>AAAwAQ==</data>
+		<key>hda-gfx</key>
+		<string>onboard-1</string>
+		<key>igfxfw</key>
+		<data>AgAAAA==</data>
+		<key>force-online</key>
+		<data>AQAAAA==</data>
+		<key>rps-control</key>
+		<data>AQAAAA==</data>
+	</dict>
+```     
 <details>
 <summary>Image: iGPU as main card</summary>
 <br>
 <img src="iGPU as main card.png">
 </details>
 
-The config.plist file in *EFI-intel630* folder is already set in this way.
+### AMD RX 6600 on Ventura with MacPro or iMacPro SMBIOS
 
-Note: don't forget to rename the EFI folder from *EFI-macpro* or *EFI-intel630* to *EFI*.
+AMD Navi cards run fine on Ventura when using iMac SMBIOS with `agdpmod=pikera` in boot args as the only needed setting. But when using MacPro or iMacPro SMBIOS a lot of users have reported black screen. The simplest way to fix this is to add in DeviceProperties of config.plist some properties that set Henbury framebuffer for each of the 4 ports of this GPU.
+
+By default, Radeon framebuffer (`ATY,Radeon`) is loaded. But, in AMDRadeonX6000Framebuffer.kext >> Contents >> Info.plist we can see that AMDRadeonNavi23Controller has `ATY,Henbury` and 6600 series are Navi 23. This is why this framebuffer is selected.
+
+The patch is added in this way:
+
+``` xml
+<key>DeviceProperties</key>
+    <dict>
+        <key>Add</key>
+        <dict>
+            <key>PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)</key>
+            <dict>
+                <key>@0,name</key>
+                <string>ATY,Henbury</string>
+                <key>@1,name</key>
+                <string>ATY,Henbury</string>
+                <key>@2,name</key>
+                <string>ATY,Henbury</string>
+                <key>@3,name</key>
+                <string>ATY,Henbury</string>
+            </dict>
+        </dict>
+        <key>Delete</key>
+        <dict/>
+    </dict>
+```
+Notes:
+
+- PCI path to the GPU may be the same on your system but it is convenient to check it with Hackintool (app) or gfxutil (Terminal utility).
+- This is not needed for Big Sur or Monterey.
+- This is not needed for RX 580.
 
 ### Installing Big Sur or  Monterey
 
@@ -172,12 +205,39 @@ The process is almost the same for installation and for update:
 - You need a working EFI folder
 - Download macOS from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info
 - Run Install macOS Big Sur / Monterey app from the Desktop or the setup program from the booted USB
-- The process has 2 reboots booting from Macintosh HD and a third reboot booting from the target disk with Monterey.
+- The process has 2 reboots booting from Install macOS disk and a third reboot booting from the target disk with Monterey.
+
+### SMBIOS and config.plist files
+
+There are eight configuration files, the ones starting with _config-12_ are for Big Sur and Monterey and the ones starting with _config-13_ are for Ventura. Variants are included for 4 possible SMBIOS:
+
+- iMac19,1 with AMD dGPU + iGPU headless mode
+- iMac19,1 with iGPU as main card without dGPU
+- MacPro7,1 with dGPU + iGPU disabled
+- iMacPro1,1 with dGPU + iGPU disabled.
+
+List of config.plist files:
+
+- config-12-imac-amd.plist: iMac19,1 + dGPU AMD + iGPU enabled in BIOS
+- config-12-imac-intel.plist: iMac19,1 + iGPU enabled in BIOS as main card
+- config-12-imacpro.plist: iMacPro1,1 + dGPU AMD + iGPU disabled in BIOS
+- config-12-macpro.plist: MacPro7,1 + dGPU AMD + iGPU disabled in BIOS
+- config-13-imac-amd.plist: iMac19,1 + dGPU AMD + iGPU enabled in BIOS
+- config-13-imac-intel.plist: iMac19,1 + iGPU enabled in BIOS as main card
+- config-13-imacpro.plist: iMacPro1,1 + dGPU AMD + iGPU disabled in BIOS
+- config-13-macpro.plist: MacPro7,1 + dGPU AMD + iGPU disabled in BIOS.
+
+Notes
+
+- rename selected config file to config.plist
+- current GPU is to AMD RX 6600 XT; for RX 580 and other Polaris cards remove `agdpmod=piker`a from boot-args and don't use the framebuffer patch
+- add serial numbers for the SMBIOS model
 
 ### Important!
 
-1. Do ResetNVRAM the first time you boot a new EFI.
-2. Press spacebar to show auxiliary entries in the picker.
+1. Don't forget to rename the selected config file to config.plist.
+2. Do ResetNVRAM the first time you boot a new EFI.
+3. Press spacebar to show auxiliary entries in the picker.
 
 ### Credits
 

@@ -67,7 +67,7 @@ SMBIOS model that works best on my systems is iMac19,1. This Mac model requires:
 MacPro7,1 SMBIOS can be set if desired. It works also very well. This Mac model requires:
 
 - AMD dGPU as main card
-- Intel 630 iGPU disabled in BIOS
+- Intel 630 iGPU disabled in BIOS (as this Mac models lack integrated GPU, they have only AMD GPU)
 - RestrictEvents.kext to avoid RAM misconfiguration warnings
 - CPUFriend.kext: not mandatory but in my opinion it improves CPU Power Management.
 
@@ -106,7 +106,52 @@ Settings are generally the same as for Big Sur. Some significant details:
 	(`agdpmod=pikera` not needed with RX 580, only with RX 6600 and other Navi cards)
 - Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
 
-### Intel UHD 630
+### Intel UHD 630 headless mode
+
+- iGPU and dGPU must be enabled in BIOS with dGPU as primary
+- There should be no cable between iGPU HDMI port and any type of display
+- Lilu and WhatEverGreen properly installed
+- SMBIOS iMac19.1.
+
+You have to add in `DeviceProperties >> Add`:
+
+``` xml
+			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+			<dict>
+				<key>AAPL,ig-platform-id</key>
+				<data>AwCRPg==</data>
+				<key>device-id</key>
+				<data>mz4AAA==</data>
+				<key>enable-metal</key>
+				<data>AQAAAA==</data>
+				<key>igfxfw</key>
+				<data>AgAAAA==</data>
+				<key>force-online</key>
+				<data>AQAAAA==</data>
+				<key>rps-control</key>
+				<data>AQAAAA==</data>
+			</dict>
+```
+
+This code has data values in Base64, in plist editors they can be seen as hexadecimal, e.g. `AwCRPg==` in Base64 (_AAPL,ig-platform-id_) = `0300913E` in hexadecimal.
+
+To check if the VDA Decoder function is activated you can get Hackintool app (_Fully Supported_ or _Failed_ in the first System tab).
+
+Notes:
+
+- `device-id=9B3E000` to be displayed as `Intel UHD Graphics 630` instead of `Kabylake Unknown`
+- `enable-metal=01` to enable Metal 3 in Ventura
+- `force-online=01` to force online status on all displays (mandatory)
+- `igfxfw=02`to force loading of Apple GuC firmware (improves IGPU performance)
+- `rps-control=01` to enable RPS control patch (improves IGPU performance).
+
+<details>
+<summary>Image: iGPU as secondary card</summary>
+<br>
+<img src="iGPU as secondary card.png">
+</details>
+
+### Intel UHD 630 as single GPU
 
 If you don't have an external graphics card and need to use the iGPU as single card, you have to use iMac19,1 SMBIOS with code in config.plist to patch the framebuffer and other properties so that the iGPU is well detected:
 
@@ -156,7 +201,15 @@ If you don't have an external graphics card and need to use the iGPU as single c
 		<key>rps-control</key>
 		<data>AQAAAA==</data>
 	</dict>
-```     
+```
+Notes
+
+- `AAPL,ig-platform-id=07009B3E` is mandatory
+- `device-id=9B3E0000` makes the iGPU recognized by some programs as Intel UHD 630 instead of KabyLake Unknown
+- `force-online=01000000` is mandatory to force online status on all ports (replaces `igfxonln=1` boot argument)
+- `enable-metal=01000000` to enable Metal 3 support
+- `igfxfw=02000000` and `rps-control=01000000` to improve performance.
+ 
 <details>
 <summary>Image: iGPU as main card</summary>
 <br>
@@ -197,6 +250,16 @@ Notes:
 - PCI path to the GPU may be the same on your system but it is convenient to check it with Hackintool (app) or gfxutil (Terminal utility).
 - This is not needed for Big Sur or Monterey.
 - This is not needed for RX 580.
+
+If needed for other Navi cards, the framebuffers to be loaded are different for each family:
+
+<table>
+<tr><td>5500</td><td>ATY,Python</td></tr>
+<tr><td>5700</td><td>ATY,Adder</td></tr>
+<tr><td>6600</td><td>ATY,Henbury</td></tr>
+<tr><td>6800</td><td>ATY,Belknap</td></tr>
+<tr><td>6900</td><td>ATY,Carswell</td></tr>
+</table>
 
 ### Installing Big Sur or  Monterey
 

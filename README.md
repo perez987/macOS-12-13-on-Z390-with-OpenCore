@@ -1,10 +1,10 @@
 ![macOS](https://badgen.net/github/checks/node-formidable/node-formidable/master/macos) ![License](https://badgen.net/badge/license/MIT/blue)
 
-# macOS Monterey / Big Sur / Ventura with OpenCore 0.8.5 on Z390 Aorus Elite motherboard (AMD ~~RX 580~~ RX 6600 or Intel UHD 630)
+# macOS Monterey / Big Sur / Ventura with OpenCore 0.8.6 on Z390 Aorus Elite motherboard (AMD ~~RX 580~~ RX 6600 or Intel UHD 630)
 
 <table>
 <tr><td align=center width=272px height=272px><img src="macOS13.png" alt="Monterey HDD"></td></tr>
-<tr><td><b>Guide and EFI using OpenCore 0.8.5 for Big Sur, Monterey and Ventura on Gigabyte Z390 Aorus Elite motherboard. The same setup I use with Big Sur also works for Monterey (Ventura has differences). Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</b></td></tr>
+<tr><td><b>Guide and EFI using OpenCore 0.8.6 for Big Sur, Monterey and Ventura on Gigabyte Z390 Aorus Elite motherboard. The same setup I use with Big Sur also works for Monterey (Ventura has differences). Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</b></td></tr>
 </table>
 
 ### Hardware
@@ -46,9 +46,9 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
-### OpenCore 0.8.5
+### OpenCore 0.8.6
 
-I have used OpenCore version 0.8.5. For the installation to be successful, 3 parameters related to security must be set:
+For the installation to be successful, 3 parameters related to security must be set:
 
 - `SecureBootModel=j160` or `SecureBootModel=Default` in config.plist (Apple secure boot `j160` corresponds to MacPro7,1 and `Default` sets the same model as in SMBIOS)
 - SIP enabled (`csr-active-config=00000000` in config.plist)

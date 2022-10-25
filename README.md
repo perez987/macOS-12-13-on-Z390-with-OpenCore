@@ -139,6 +139,7 @@ To check if the VDA Decoder function is activated you can get Hackintool app (_F
 
 Notes:
 
+- `AAPL,ig-platform-id=07009B3E` is mandatory
 - `device-id=9B3E000` to be displayed as `Intel UHD Graphics 630` instead of `Kabylake Unknown`
 - `enable-metal=01` to enable Metal 3 in Ventura
 - `force-online=01` to force online status on all displays (mandatory)
@@ -202,14 +203,7 @@ If you don't have an external graphics card and need to use the iGPU as single c
 		<data>AQAAAA==</data>
 	</dict>
 ```
-Notes
 
-- `AAPL,ig-platform-id=07009B3E` is mandatory
-- `device-id=9B3E0000` makes the iGPU recognized by some programs as Intel UHD 630 instead of KabyLake Unknown
-- `force-online=01000000` is mandatory to force online status on all ports (replaces `igfxonln=1` boot argument)
-- `enable-metal=01000000` to enable Metal 3 support
-- `igfxfw=02000000` and `rps-control=01000000` to improve performance.
- 
 <details>
 <summary>Image: iGPU as main card</summary>
 <br>

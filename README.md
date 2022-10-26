@@ -261,7 +261,7 @@ The process is almost the same for installation and for update:
 
 - You need a working EFI folder
 - Download macOS from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info
-- Run Install macOS Big Sur / Monterey app from the Desktop or the setup program from the booted USB
+- Run Install macOS Big Sur / Monterey / Ventura app or the setup program from the booted USB
 - The process has 2 reboots booting from Install macOS disk and a third reboot booting from the target disk with Monterey.
 
 ### SMBIOS and config.plist files

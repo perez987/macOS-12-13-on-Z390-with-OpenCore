@@ -1,6 +1,6 @@
 ![macOS](https://badgen.net/github/checks/node-formidable/node-formidable/master/macos) ![License](https://badgen.net/badge/license/MIT/blue)
 
-# macOS Monterey / Big Sur / Ventura with OpenCore 0.8.6 on Z390 Aorus Elite motherboard (AMD ~~RX 580~~ RX 6600 or Intel UHD 630)
+# macOS Monterey / Big Sur / Ventura with OpenCore 0.8.6 on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
 
 <table>
 <tr><td align=center width=272px height=272px><img src="macOS13.png" alt="Monterey HDD"></td></tr>
@@ -11,11 +11,11 @@
 
 <table>
        <tr><td>Motherboard</td><td>Gigabyte Z390 Aorus Elite</td></tr>
-       <tr><td>Sound</td></td><td>Realtek ALC1220</td></tr>
-       <tr><td>Ethernet</td><td>Intel I219V7</td></tr>
        <tr><td>CPU</td><td>Intel i7 9700</td></tr>
        <tr><td>iGPU</td><td>Intel UHD Graphics 630</td></tr>
-       <tr><td>dGPU</td><td>AMD Radeon <s>RX 580 8GB</s> RX 6600 8GB</td></tr>
+       <tr><td>dGPU</td><td>AMD Radeon RX 6600 8GB</td></tr>
+       <tr><td>Sound</td></td><td>Realtek ALC1220</td></tr>
+       <tr><td>Ethernet</td><td>Intel I219V7</td></tr>
        <tr><td>Wifi + BT</td><td>Fenvi FV-T919 BCM94360CD</td></tr>
 </table>
 
@@ -48,7 +48,7 @@
 
 ### OpenCore 0.8.6
 
-For the installation to be successful, 3 parameters related to security must be set:
+For the installation / update to be successful, 3 parameters related to security must be set:
 
 - `SecureBootModel=j160` or `SecureBootModel=Default` in config.plist (Apple secure boot `j160` corresponds to MacPro7,1 and `Default` sets the same model as in SMBIOS)
 - SIP enabled (`csr-active-config=00000000` in config.plist)

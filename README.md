@@ -116,21 +116,21 @@ Settings are generally the same as for Big Sur. Some significant details:
 You have to add in `DeviceProperties >> Add`:
 
 ``` xml
-			<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-			<dict>
-				<key>AAPL,ig-platform-id</key>
-				<data>AwCRPg==</data>
-				<key>device-id</key>
-				<data>mz4AAA==</data>
-				<key>enable-metal</key>
-				<data>AQAAAA==</data>
-				<key>igfxfw</key>
-				<data>AgAAAA==</data>
-				<key>force-online</key>
-				<data>AQAAAA==</data>
-				<key>rps-control</key>
-				<data>AQAAAA==</data>
-			</dict>
+<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+<dict>
+	<key>AAPL,ig-platform-id</key>
+	<data>AwCRPg==</data>
+	<key>device-id</key>
+	<data>mz4AAA==</data>
+	<key>enable-metal</key>
+	<data>AQAAAA==</data>
+	<key>igfxfw</key>
+	<data>AgAAAA==</data>
+	<key>force-online</key>
+	<data>AQAAAA==</data>
+	<key>rps-control</key>
+	<data>AQAAAA==</data>
+</dict>
 ```
 
 This code has data values in Base64, in plist editors they can be seen as hexadecimal, e.g. `AwCRPg==` in Base64 (_AAPL,ig-platform-id_) = `0300913E` in hexadecimal.
@@ -157,51 +157,51 @@ Notes:
 If you don't have an external graphics card and need to use the iGPU as single card, you have to use iMac19,1 SMBIOS with code in config.plist to patch the framebuffer and other properties so that the iGPU is well detected:
 
 ``` xml
-	<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
-	<dict>
-		<key>AAPL,ig-platform-id</key>
-		<data>BwCbPg==</data>
-		<key>device-id</key>
-		<data>mz4AAA==</data>
-		<key>device_type</key>
-		<string>VGA compatible controller</string>
-		<key>enable-hdmi20</key>
-		<data>AQAAAA==</data>
-		<key>enable-metal</key>
-		<data>AQAAAA==</data>
-		<key>framebuffer-con0-busid</key>
-		<data>AAAAAA==</data>
-		<key>framebuffer-con0-enable</key>
-		<data>AQAAAA==</data>
-		<key>framebuffer-con0-pipe</key>
-		<data>EgAAAA==</data>
-		<key>framebuffer-con1-busid</key>
-		<data>AAAAAA==</data>
-		<key>framebuffer-con1-enable</key>
-		<data>AQAAAA==</data>
-		<key>framebuffer-con1-pipe</key>
-		<data>EgAAAA==</data>
-		<key>framebuffer-con2-busid</key>
-		<data>BAAAAA==</data>
-		<key>framebuffer-con2-enable</key>
-		<data>AQAAAA==</data>
-		<key>framebuffer-con2-pipe</key>
-		<data>EgAAAA==</data>
-		<key>framebuffer-con2-type</key>
-		<data>AAgAAA==</data>
-		<key>framebuffer-patch-enable</key>
-		<data>AQAAAA==</data>
-		<key>framebuffer-stolenmem</key>
-		<data>AAAwAQ==</data>
-		<key>hda-gfx</key>
-		<string>onboard-1</string>
-		<key>igfxfw</key>
-		<data>AgAAAA==</data>
-		<key>force-online</key>
-		<data>AQAAAA==</data>
-		<key>rps-control</key>
-		<data>AQAAAA==</data>
-	</dict>
+<key>PciRoot(0x0)/Pci(0x2,0x0)</key>
+<dict>
+	<key>AAPL,ig-platform-id</key>
+	<data>BwCbPg==</data>
+	<key>device-id</key>
+	<data>mz4AAA==</data>
+	<key>device_type</key>
+	<string>VGA compatible controller</string>
+	<key>enable-hdmi20</key>
+	<data>AQAAAA==</data>
+	<key>enable-metal</key>
+	<data>AQAAAA==</data>
+	<key>framebuffer-con0-busid</key>
+	<data>AAAAAA==</data>
+	<key>framebuffer-con0-enable</key>
+	<data>AQAAAA==</data>
+	<key>framebuffer-con0-pipe</key>
+	<data>EgAAAA==</data>
+	<key>framebuffer-con1-busid</key>
+	<data>AAAAAA==</data>
+	<key>framebuffer-con1-enable</key>
+	<data>AQAAAA==</data>
+	<key>framebuffer-con1-pipe</key>
+	<data>EgAAAA==</data>
+	<key>framebuffer-con2-busid</key>
+	<data>BAAAAA==</data>
+	<key>framebuffer-con2-enable</key>
+	<data>AQAAAA==</data>
+	<key>framebuffer-con2-pipe</key>
+	<data>EgAAAA==</data>
+	<key>framebuffer-con2-type</key>
+	<data>AAgAAA==</data>
+	<key>framebuffer-patch-enable</key>
+	<data>AQAAAA==</data>
+	<key>framebuffer-stolenmem</key>
+	<data>AAAwAQ==</data>
+	<key>hda-gfx</key>
+	<string>onboard-1</string>
+	<key>igfxfw</key>
+	<data>AgAAAA==</data>
+	<key>force-online</key>
+	<data>AQAAAA==</data>
+	<key>rps-control</key>
+	<data>AQAAAA==</data>
+</dict>
 ```
 
 <details>

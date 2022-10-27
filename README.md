@@ -1,10 +1,10 @@
 ![macOS](https://badgen.net/github/checks/node-formidable/node-formidable/master/macos) ![License](https://badgen.net/badge/license/MIT/blue)
 
-# macOS Ventura / Monterey / Big Sur with OpenCore 0.8.6 on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
+# macOS Ventura / Monterey with OpenCore 0.8.6 on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
 
 <table>
 <tr><td align=center width=272px height=272px><img src="macOS13.png" alt="Monterey HDD"></td></tr>
-<tr><td><b>Guide and EFI using OpenCore 0.8.6 for Ventura / Monterey / Big Sur on Gigabyte Z390 Aorus Elite motherboard. The same setup I use with Big Sur also works for Monterey (Ventura has differences). Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</b></td></tr>
+<tr><td><b>Guide and EFI using OpenCore 0.8.6 for Ventura / Monterey on Gigabyte Z390 Aorus Elite motherboard. The same setup I used to have with Big Sur also works for Monterey / Ventura. Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</b></td></tr>
 </table>
 
 ### Hardware
@@ -54,7 +54,7 @@ For the installation / update to be successful, 3 parameters related to security
 - SIP enabled (`csr-active-config=00000000` in config.plist)
 - Gatekeeper enabled (`sudo spctl --master-enable` in Terminal).
 
-These security options can be changed after installation as they do not are required for Big Sur / Monterey / Ventura to run.
+These security options can be changed after installation as they do not are required for Monterey / Ventura to run.
 
 ### SMBIOS
 
@@ -98,12 +98,12 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 
 ### config.plist
 
-Settings are generally the same as for Big Sur. Some significant details:
+Some settings:
 
 - DeviceProperties >> Add >> PciRoot(0x0)/Pci(0x14,0x0): acpi-wake-type as data=01, to improve wake from sleep
 - Misc >> Boot >> PickerAttributes=144 to enable Flavours system
 - NVRAM> 7C436110-AB2A-4BBB-A880-FE41995C9F82> boot-args: `alcid=7 agdpmod=pikera`
-	(`agdpmod=pikera` not needed with RX 580, only with RX 6600 and other Navi cards)
+	(`agdpmod=pikera` not needed with RX 580 or Polaris card, only with RX 6600 and Navi cards)
 - Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
 
 ### Intel UHD 630 headless mode
@@ -212,7 +212,7 @@ If you don't have an external graphics card and need to use the iGPU as single c
 
 ### AMD RX 6600 on Ventura with MacPro or iMacPro SMBIOS
 
-AMD Navi cards run fine on Ventura when using iMac SMBIOS with `agdpmod=pikera` in boot args as the only needed setting. But when using MacPro or iMacPro SMBIOS a lot of users have reported black screen. The simplest way to fix this is to add in DeviceProperties of config.plist some properties that set Henbury framebuffer for each of the 4 ports of this GPU.
+AMD Navi cards run fine on Ventura when using iMac SMBIOS with `agdpmod=pikera` in boot args as the only needed setting. But when using MacPro or iMacPro SMBIOS a lot of users have reported black screen. The simplest way to fix this is to add in DeviceProperties of config.plist properties that set Henbury framebuffer for each of the 4 ports of this GPU.
 
 By default, Radeon framebuffer (`ATY,Radeon`) is loaded. But, in AMDRadeonX6000Framebuffer.kext >> Contents >> Info.plist we can see that AMDRadeonNavi23Controller has `ATY,Henbury` and 6600 series are Navi 23. This is why this framebuffer is selected.
 
@@ -242,7 +242,7 @@ The patch is added in this way:
 Notes:
 
 - PCI path to the GPU may be the same on your system but it is convenient to check it with Hackintool (app) or gfxutil (Terminal utility).
-- This is not needed for Big Sur or Monterey.
+- This is not needed for Monterey.
 - This is not needed for RX 580.
 
 If needed for other Navi cards, the framebuffers to be loaded are different for each family:
@@ -255,18 +255,18 @@ If needed for other Navi cards, the framebuffers to be loaded are different for 
 <tr><td>6900</td><td>ATY,Carswell</td></tr>
 </table>
 
-### Installing Big Sur or  Monterey
+### Installing Monterey / Ventura
 
 The process is almost the same for installation and for update:
 
 - You need a working EFI folder
 - Download macOS from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info
-- Run Install macOS Big Sur / Monterey / Ventura app or the setup program from the booted USB
+- Run Install macOS Monterey / Ventura app or the setup program from the booted USB
 - The process has 2 reboots booting from Install macOS disk and a third reboot booting from the target disk with Monterey.
 
 ### SMBIOS and config.plist files
 
-There are eight configuration files, the ones starting with _config-12_ are for Big Sur and Monterey and the ones starting with _config-13_ are for Ventura. Variants are included for 4 possible SMBIOS:
+There are eight configuration files, the ones starting with _config-12_ are for Monterey and the ones starting with _config-13_ are for Ventura. Variants are included for 4 possible SMBIOS:
 
 - iMac19,1 with AMD dGPU + iGPU headless mode
 - iMac19,1 with iGPU as main card without dGPU

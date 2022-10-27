@@ -4,7 +4,11 @@
 
 <table>
 <tr><td align=center width=272px height=272px><img src="macOS13.png" alt="Monterey HDD"></td></tr>
-<tr><td><b>Guide and EFI using OpenCore 0.8.6 for Ventura / Monterey on Gigabyte Z390 Aorus Elite motherboard. The same setup I used to have with Big Sur also works for Monterey / Ventura. Settings for AMD dGPU as main card or iGPU as single card. EFI folder available.</b></td></tr>
+<tr><td><b><ul>
+	<li>Guide and EFI using OpenCore 0.8.6 for Ventura / Monterey on Gigabyte Z390 Aorus Elite motherboard</li>
+	<li>Settings for AMD dGPU as main card or iGPU as single card</li>
+	<li>EFI folder available for different SMBIOS.</li>
+	</ul></b></td></tr>
 </table>
 
 ### Hardware

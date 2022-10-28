@@ -259,6 +259,57 @@ If needed for other Navi cards, the framebuffers to be loaded are different for 
 <tr><td>6900</td><td>ATY,Carswell</td></tr>
 </table>
 
+**Alternative method to avoid black screen with MacPro or iMacPro SMBIOS** (thanks @dreamwhite)
+
+Using SSDT-BRG0.aml fixes black screen on Ventura with SMBIOS models lacking iGPU. This SSDT allows to define a missing pci-bridge device. With it, the Henbury patch is no longer necessary.
+
+Do not forget that the Henbury patch clearly drops down the GeekBench 5 scores, however with SSDT-BRG0 expected scores are got, in line with those got by many users with this graphics card.
+
+SSDT-BRG0:
+
+```c++
+ /*
+ * This table provides an example of creating a missing ACPI device
+ * to ensure early DeviceProperty application. In this example
+ * a GPU device is created for a platform having an extra PCI
+ * bridge in the path - PCI0.PEG0.PEGP.BRG0.GFX0:
+ * PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
+ * Such tables are particularly relevant for macOS 11.0 and newer.
+ */
+ 
+DefinitionBlock ("", "SSDT", 2, "ACDT", "BRG0", 0x00000000)
+{
+    External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
+
+    Scope (\_SB.PCI0.PEG0.PEGP)
+    {
+        Device (BRG0)
+        {
+            Name (_ADR, Zero)  // _ADR: Address
+            Device (GFX0)
+            {
+                Name (_ADR, Zero)  // _ADR: Address
+            }
+
+            Device (HDAU)
+            {
+                Name (_ADR, One)  // _ADR: Address
+            }
+        }
+    }
+}
+```
+Be sure of the PCI path to your dGPU, mine is `/PCI0@0/PEG0@1/PEGP@0/GFX0@0` so the SSDT has these lines: 
+```
+External (_SB_.PCI0.PEG0.PEGP, DeviceObj)` but yours may be different. How to check your PCI path?
+
+Scope (\_SB.PCI0.PEG0.PEGP)
+```
+Modify the SSDT (if needed) to be set within your system. How to chek the PCI path?
+
+- gfxutil utility in Terminal, look for the line containing GFX0 at the end
+- Hackintool >> PCIe tab >> pointer over Navi 23 line >> copy IOReg patch.
+
 ### Installing Monterey / Ventura
 
 The process is almost the same for installation and for update:

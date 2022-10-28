@@ -298,7 +298,7 @@ DefinitionBlock ("", "SSDT", 2, "ACDT", "BRG0", 0x00000000)
 }
 ```
 Be sure of the PCI path to your dGPU, mine is `/PCI0@0/PEG0@1/PEGP@0/GFX0@0` so the SSDT has these lines: 
-```
+``` c++
 External (_SB_.PCI0.PEG0.PEGP, DeviceObj)` but yours may be different. How to check your PCI path?
 
 Scope (\_SB.PCI0.PEG0.PEGP)

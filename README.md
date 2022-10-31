@@ -341,7 +341,7 @@ Notes
 
 - rename selected config file to config.plist
 - current GPU is AMD RX 6600 XT; for RX 580 and other Polaris cards remove `agdpmod=piker`a from boot-args and don't use the framebuffer patch
-- add serial numbers for the SMBIOS model
+- add serial numbers for the SMBIOS model.
 
 ### Important!
 

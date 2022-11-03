@@ -257,7 +257,7 @@ If needed for other Navi cards, the framebuffers to be loaded are different for 
 <tr><td>6900</td><td>ATY,Carswell</td></tr>
 </table>
 
-**Alternative method to avoid black screen with MacPro or iMacPro SMBIOS** (thanks [@dreamwhite](https://github.com/dreamwhite))
+**Alternative method to avoid black screen with MacPro or iMacPro SMBIOS (1)** (thanks [@dreamwhite](https://github.com/dreamwhite))
 
 Using SSDT-BRG0.aml fixes black screen on Ventura with SMBIOS models lacking iGPU. This SSDT allows to define a missing `pci-bridge` device. With it, the Henbury patch is no longer necessary.
 
@@ -307,6 +307,76 @@ Modify the SSDT (if needed) to be set within your system. How to chek the PCI pa
 
 - gfxutil utility in Terminal, look for the line containing GFX0 at the end
 - Hackintool >> PCIe tab >> pointer over Navi 23 line >> copy IOReg patch.
+
+**Alternative method to avoid black screen with MacPro or iMacPro SMBIOS (2)**
+
+There are some more advanced SSDT configurations such as SSDT-VEGA.aml which, in addition to creating devices, does so by mimicking the way real Macs are configured (EGP0 and EGP1 devices instead of BRG0).
+ 
+SSDT-VEGA has the same benefits as SSDT-BRG0: Henbury patch not needed and good GeekBench 5 scores.
+ 
+It also requires checking the PCI path to your graphics card. In the example code I keep the same path as in the previous SSDT-BRG0.
+```c++
+DefinitionBlock ("", "SSDT", 2, "HACK", "VEGA", 0x00000000)
+{
+    External (_SB_.PCI0, DeviceObj)
+    External (_SB_.PCI0.PEG0, DeviceObj)
+    External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
+
+    Scope (\_SB)
+    {
+        Scope (PCI0)
+        {
+            Scope (PEG0)
+            {
+                Scope (PEGP)
+                {
+                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    {
+                        If (_OSI ("Darwin"))
+                        {
+                            Return (Zero)
+                        }
+                        Else
+                        {
+                            Return (0x0F)
+                        }
+                    }
+                }
+
+                Device (EGP0)
+                {
+                    Name (_ADR, Zero)  // _ADR: Address
+                    Method (_STA, 0, NotSerialized)  // _STA: Status
+                    {
+                        If (_OSI ("Darwin"))
+                        {
+                            Return (0x0F)
+                        }
+                        Else
+                        {
+                            Return (Zero)
+                        }
+                    }
+
+                    Device (EGP1)
+                    {
+                        Name (_ADR, Zero)  // _ADR: Address
+                        Device (GFX0)
+                        {
+                            Name (_ADR, Zero)  // _ADR: Address
+                        }
+
+                        Device (HDAU)
+                        {
+                            Name (_ADR, One)  // _ADR: Address
+                        }
+                    }
+                }
+            }
+        }
+    }
+}  
+```
 
 ### Installing Monterey / Ventura
 

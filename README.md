@@ -257,7 +257,7 @@ If needed for other Navi cards, the framebuffers to be loaded are different for 
 <tr><td>6900</td><td>ATY,Carswell</td></tr>
 </table>
 
-**Alternative method to avoid black screen with MacPro or iMacPro SMBIOS (1)** (thanks [@dreamwhite](https://github.com/dreamwhite))
+**1. Alternative method to avoid black screen with MacPro or iMacPro SMBIOS** (thanks [@dreamwhite](https://github.com/dreamwhite))
 
 Using SSDT-BRG0.aml fixes black screen on Ventura with SMBIOS models lacking iGPU. This SSDT allows to define a missing `pci-bridge` device. With it, the Henbury patch is no longer necessary.
 
@@ -308,7 +308,7 @@ Modify the SSDT (if needed) to be set within your system. How to chek the PCI pa
 - gfxutil utility in Terminal, look for the line containing GFX0 at the end
 - Hackintool >> PCIe tab >> pointer over Navi 23 line >> copy IOReg patch.
 
-**Alternative method to avoid black screen with MacPro or iMacPro SMBIOS (2)**
+**2. Alternative method to avoid black screen with MacPro or iMacPro SMBIOS**
 
 There are some more advanced SSDT configurations such as SSDT-VEGA.aml which, in addition to creating devices, does so by mimicking the way real Macs are configured (EGP0 and EGP1 devices instead of BRG0).
  

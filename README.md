@@ -66,16 +66,16 @@ SMBIOS model that works best on my systems is iMac19,1. This Mac model requires:
 - Intel 630 iGPU enabled in BIOS
 - iGPU code for headless mode in config.plist.
 
-MacPro7,1 SMBIOS can be set if desired. It works also very well. This Mac model requires:
+iMacPro1,1 or MacPro7,1 SMBIOS can be set if desired. They work also very well. This SMBIOS require:
 
 - AMD dGPU as main card
 - Intel 630 iGPU disabled in BIOS (as this Mac models lack integrated GPU, they have only AMD GPU)
-- RestrictEvents.kext to avoid RAM misconfiguration warnings
-- CPUFriend.kext: not mandatory but in my opinion it improves CPU Power Management.
+- RestrictEvents.kext to avoid RAM misconfiguration warnings (only MacPro7,1)
+- CPUFriend.kext: not mandatory but in my opinion it improves CPU Power Management (only MacPro1,1).
 
 ### CPUFriend.kext
 
-Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does not run at low frequency as often as it does with iMac19.1. For this reason, I have generated a CPUFriendDataProvider.kext extension from the CPUFriendFriend command to accompany CPUFriend.kext. With these 2 kexts (CPUFriendDataProvider.kext + CPUFriend.kext) the CPU shows correct power management and frequency drops to 800 MHz at system idle.
+Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does not run at low frequency as often as it does with iMac19.1 or iMacPro1,1. For this reason, I have generated a CPUFriendDataProvider.kext extension by the CPUFriendFriend command to accompany CPUFriend.kext. Remember that this kext is specific to my CPU: i7 9700, try building your own if yours differs. With these 2 kexts (CPUFriendDataProvider.kext + CPUFriend.kext) the CPU shows correct power management and frequency drops to 800 MHz at system idle.
 
 ### SSDTs, drivers and tools
 
@@ -245,7 +245,8 @@ Notes:
 
 - PCI path to the GPU may be the same on your system but it is convenient to check it with Hackintool (app) or gfxutil (Terminal utility).
 - This is not needed for Monterey.
-- This is not needed for RX 580.
+- This is not needed for Polaris cards (RX 580).
+- Henbury patch drops down significantly GeekBench 5 Metal scores.
 
 If needed for other Navi cards, the framebuffers to be loaded are different for each family:
 
@@ -261,12 +262,12 @@ If needed for other Navi cards, the framebuffers to be loaded are different for 
 
 Using SSDT-BRG0.aml fixes black screen on Ventura with SMBIOS models lacking iGPU. This SSDT allows to define a missing `pci-bridge` device. With it, the Henbury patch is no longer necessary.
 
-Do not forget that the Henbury patch clearly drops down the GeekBench 5 scores, however with SSDT-BRG0 expected scores are got, in line with those got by many users with this graphics card.
+As noted above, the Henbury patch drops down the GeekBench 5 scores, however with SSDT-BRG0 expected scores are got, in line with those got by many users with this graphics card.
 
 SSDT-BRG0:
 
 ```c++
- /*
+/*
  * This table provides an example of creating a missing ACPI device
  * to ensure early DeviceProperty application. In this example
  * a GPU device is created for a platform having an extra PCI
@@ -274,24 +275,39 @@ SSDT-BRG0:
  * PciRoot(0x0)/Pci(0x1,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)/Pci(0x0,0x0)
  * Such tables are particularly relevant for macOS 11.0 and newer.
  */
- 
+
 DefinitionBlock ("", "SSDT", 2, "ACDT", "BRG0", 0x00000000)
 {
     External (_SB_.PCI0.PEG0.PEGP, DeviceObj)
 
     Scope (\_SB.PCI0.PEG0.PEGP)
     {
+        /*
+         * This is a PCI bridge device present on PEGP.
+         * Normally seen as pci-bridge in I/O Registry.
+         */
         Device (BRG0)
         {
-            Name (_ADR, Zero)  // _ADR: Address
+            Name (_ADR, Zero)
+            Method (_STA, 0, NotSerialized)  // _STA: Status
+            {
+                If (_OSI ("Darwin"))
+                {
+                    Return (0x0F)
+                }
+                Else
+                {
+                    Return (Zero)
+                }
+            }
+
+            /*
+             * This is an actual GPU device present on the bridge.
+             * Normally seen as display in I/O Registry.
+             */
             Device (GFX0)
             {
                 Name (_ADR, Zero)  // _ADR: Address
-            }
-
-            Device (HDAU)
-            {
-                Name (_ADR, One)  // _ADR: Address
             }
         }
     }
@@ -411,7 +427,8 @@ Notes
 
 - rename selected config file to config.plist
 - current GPU is AMD RX 6600 XT; for RX 580 and other Polaris cards remove `agdpmod=piker`a from boot-args and don't use the framebuffer patch
-- add serial numbers for the SMBIOS model.
+- add serial numbers for the SMBIOS model
+- USB ports map is specific for muy motherboard: Z390 Aorus Elite.
 
 ### Important!
 

@@ -126,12 +126,6 @@ You have to add in `DeviceProperties >> Add`:
 	<data>mz4AAA==</data>
 	<key>enable-metal</key>
 	<data>AQAAAA==</data>
-	<key>igfxfw</key>
-	<data>AgAAAA==</data>
-	<key>force-online</key>
-	<data>AQAAAA==</data>
-	<key>rps-control</key>
-	<data>AQAAAA==</data>
 </dict>
 ```
 
@@ -141,18 +135,17 @@ To check if the VDA Decoder function is activated you can get Hackintool app (_F
 
 Notes:
 
-- `AAPL,ig-platform-id=07009B3E` is mandatory
+- `AAPL,ig-platform-id=07009B3E` is mandatory to detect the iGPU as Coffee Lake
 - `device-id=9B3E000` to be displayed as `Intel UHD Graphics 630` instead of `Kabylake Unknown`
 - `enable-metal=01` to enable Metal 3 in Ventura
-- `force-online=01` to force online status on all displays (mandatory)
-- `igfxfw=02`to force loading of Apple GuC firmware (improves IGPU performance)
-- `rps-control=01` to enable RPS control patch (improves IGPU performance).
 
 <details>
 <summary>Image: iGPU as secondary card</summary>
 <br>
 <img src="iGPU as secondary card.png">
 </details>
+
+---
 
 ### Intel UHD 630 as single GPU
 
@@ -197,8 +190,6 @@ If you don't have an external graphics card and need to use the iGPU as single c
 	<data>AAAwAQ==</data>
 	<key>hda-gfx</key>
 	<string>onboard-1</string>
-	<key>igfxfw</key>
-	<data>AgAAAA==</data>
 	<key>force-online</key>
 	<data>AQAAAA==</data>
 	<key>rps-control</key>
@@ -206,11 +197,17 @@ If you don't have an external graphics card and need to use the iGPU as single c
 </dict>
 ```
 
+Note:
+
+- `force-online=01` to force online status on all displays (mandatory).
+
 <details>
 <summary>Image: iGPU as main card</summary>
 <br>
 <img src="iGPU as main card.png">
 </details>
+
+---
 
 ### AMD RX 6600 on Ventura with MacPro or iMacPro SMBIOS
 

@@ -145,8 +145,6 @@ Notes:
 <img src="iGPU as secondary card.png">
 </details>
 
----
-
 ### Intel UHD 630 as single GPU
 
 If you don't have an external graphics card and need to use the iGPU as single card, you have to use iMac19,1 SMBIOS with code in config.plist to patch the framebuffer and other properties so that the iGPU is well detected:
@@ -206,8 +204,6 @@ Note:
 <br>
 <img src="iGPU as main card.png">
 </details>
-
----
 
 ### AMD RX 6600 on Ventura with MacPro or iMacPro SMBIOS
 

@@ -1,9 +1,9 @@
-# macOS Ventura / Monterey with OpenCore 0.8.6 on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
+# macOS Ventura / Monterey with OpenCore 0.8.8 on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
 
 <table>
 <tr><td align=center width=272px height=272px><img src="macOS13.png" alt="Monterey HDD"></td></tr>
 <tr><td><b><ul>
-	<li>Guide using OpenCore 0.8.6 for Ventura / Monterey on Gigabyte Z390 Aorus Elite motherboard</li>
+	<li>Guide using OpenCore 0.8.8 for Ventura / Monterey on Gigabyte Z390 Aorus Elite motherboard</li>
 	<li>Settings for AMD dGPU as main card or iGPU as single card</li>
 	<li>EFI folder available for different SMBIOS.</li>
 	</ul></b></td></tr>
@@ -48,7 +48,7 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
-### OpenCore 0.8.6
+### OpenCore 0.8.8
 
 For the installation / update to be successful, 3 parameters related to security must be set:
 
@@ -60,16 +60,16 @@ These security options can be changed after installation as they do not are requ
 
 ### SMBIOS
 
-SMBIOS model that works best on my systems is iMac19,1. This Mac model requires:
+iMac19,1 SMBIOS requires:
 
 - AMD dGPU as main card
 - Intel 630 iGPU enabled in BIOS
 - iGPU code for headless mode in config.plist.
 
-iMacPro1,1 or MacPro7,1 SMBIOS can be set if desired. They work also very well. This SMBIOS require:
+iMacPro1,1 or MacPro7,1 SMBIOS require:
 
 - AMD dGPU as main card
-- Intel 630 iGPU disabled in BIOS (as this Mac models lack integrated GPU, they have only AMD GPU)
+- Intel 630 iGPU disabled in BIOS (this Mac models lack integrated GPU, they have only AMD GPU)
 - RestrictEvents.kext to avoid RAM misconfiguration warnings (only MacPro7,1)
 - CPUFriend.kext: not mandatory but in my opinion it improves CPU Power Management (only MacPro1,1).
 

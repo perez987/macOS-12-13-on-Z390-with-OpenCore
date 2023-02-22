@@ -52,7 +52,7 @@
 
 For the installation / update to be successful, 3 parameters related to security must be set:
 
-- `SecureBootModel=j160` or `SecureBootModel=Default` in config.plist (Apple secure boot `j160` corresponds to MacPro7,1 and `Default` sets the same model as in SMBIOS)
+- `SecureBootModel=j137` or `SecureBootModel=Default` in config.plist (Apple secure boot `j137` corresponds to iMacPro1,1 and `Default` sets the same model as in SMBIOS)
 - SIP enabled (`csr-active-config=00000000` in config.plist)
 - Gatekeeper enabled (`sudo spctl --master-enable` in Terminal).
 
@@ -85,7 +85,7 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 - SSDT-EC-USBX: fake Embedded Controller on Skylake and later, also fix USB power
 - SSDT-PLUG: power management on Haswell and newer CPUs; to configure the plugin-type=1 parameter on the first processor
 - SSDT-PMC: native NVRAM support on systems that lack it, for example Z390 chipsets
-- SSDT-USBW: to wake from sleep with a single mouse or keyboard touch (this SSDT works with USBWakeFixup.kext) >> very likely not needed if USB device in DeviceProperties has `acpi-wake-type=01`.
+- SSDT-USBW: to wake from sleep with a single mouse or keyboard touch (this SSDT works with USBWakeFixup.kext) >> very likely not needed if USB device in DeviceProperties has `acpi-wake-type=01` >> removed with OpenCore 0.8.9 release, using `acpi-wake-gpe=6D` in USB DeviceProperties instead.
 
 **Drivers**
 

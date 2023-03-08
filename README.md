@@ -1,9 +1,9 @@
-# macOS Ventura / Monterey with OpenCore 0.8.8 on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
+# macOS Ventura / Monterey with OpenCore on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
 
 <table>
 <tr><td align=center width=272px height=272px><img src="macOS13.png" alt="Monterey HDD"></td></tr>
 <tr><td><b><ul>
-	<li>Guide using OpenCore 0.8.8 for Ventura / Monterey on Gigabyte Z390 Aorus Elite motherboard</li>
+	<li>Guide using OpenCore for Ventura / Monterey on Gigabyte Z390 Aorus Elite motherboard</li>
 	<li>Settings for AMD dGPU as main card or iGPU as single card</li>
 	<li>EFI folder available for different SMBIOS.</li>
 	</ul></b></td></tr>
@@ -48,7 +48,7 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
-### OpenCore 0.8.8
+### OpenCore
 
 For the installation / update to be successful, 3 parameters related to security must be set:
 

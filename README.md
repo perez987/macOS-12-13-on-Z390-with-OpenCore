@@ -48,11 +48,18 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
+### Sonoma beta notes
+
+- OTA updates (incremental updates from Software Update) don't work except with iMac19,1 SMBIOS, probably related to Hackintosh missing Apple T2 chip since iMac19,1 lacks T2 chip but iMacPro1,1 and MacPro7,1 both have T2 chip.
+- Updating via the full installer package works with any of the 3 SMBIOS.
+- Broadcom BCM4360 series Wi-Fi does not work in Sonoma because the system does not include the drivers. Therefore, the Fenvi T919 card, which has worked very well OOTB so far, in Sonoma only provides Bluetooth. This is a serious inconvenience because the different USB wifi dongles that work in Sonoma lose some of the functionality of the Apple ecosystem like AirDrop, iPhone camera, etc.
+- Otherwise, Sonoma beta works fine on this PC, with few and minor bugs detected so far.
+
 ### OpenCore
 
 For the installation / update to be successful, 3 parameters related to security must be set:
 
-- `SecureBootModel=j137` or `SecureBootModel=Default` in config.plist (Apple secure boot `j137` corresponds to iMacPro1,1 and `Default` sets the same model as in SMBIOS)
+- `SecureBootModel=j137` or `j160`or `Default` in config.plist (Apple secure boot `j137` corresponds to iMacPro1,1, `j160` to MacPro7,1 and `Default` sets the same model as in SMBIOS)
 - SIP enabled (`csr-active-config=00000000` in config.plist)
 - Gatekeeper enabled (`sudo spctl --master-enable` in Terminal).
 

@@ -78,7 +78,7 @@ iMacPro1,1 or MacPro7,1 SMBIOS require:
 - AMD dGPU as main card
 - Intel 630 iGPU disabled in BIOS (this Mac models lack integrated GPU, they have only AMD GPU)
 - RestrictEvents.kext to avoid RAM misconfiguration warnings (only MacPro7,1)
-- CPUFriend.kext: not mandatory but in my opinion it improves CPU Power Management (only MacPro1,1).
+- CPUFriend.kext: not mandatory but in my opinion improves CPU Power Management (only MacPro7,1).
 
 ### CPUFriend.kext
 

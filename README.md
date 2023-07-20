@@ -31,7 +31,7 @@
 <tr><td>Airdrop, iMessage</td></tr>
 </table>
 
-### BIOS settings (version F10h)
+### BIOS settings (version F10)
 
 <table>
 <tr><td>CFG Lock: Disabled</td></tr>

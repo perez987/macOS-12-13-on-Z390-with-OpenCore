@@ -50,7 +50,9 @@
 
 ### Sonoma beta notes
 
-- OTA updates (incremental updates from Software Update) don't work except with iMac19,1 SMBIOS, probably related to Hackintosh missing Apple T2 chip since iMac19,1 lacks T2 chip but iMacPro1,1 and MacPro7,1 both have T2 chip.
+- OTA updates (incremental updates from Software Update) don't work (the update doesn't even show up in the Software Update panel) except with iMac19,1 SMBIOS, probably related to Hackintosh missing Apple T2 chip since iMac19,1 lacks T2 chip but iMacPro1,1 and MacPro7,1 both have T2 chip.
+- If you use iMacPro1,1 or MacPro7,1 SMBIOS, there is another possibility to have incremental updates without changing the SMBIOS: add RestrictEvents extension and `revpatch=sbvmm` argument in boot args.
+- Both changes (SMBIOS and RestrictEvents with boot arg) can be reverted after the update.
 - Updating via the full installer package works with any of the 3 SMBIOS.
 - Broadcom BCM4360 series Wi-Fi does not work in Sonoma because the system does not include the drivers. Therefore, the Fenvi T919 card, which has worked very well OOTB so far, in Sonoma only provides Bluetooth. This is a serious inconvenience because the different USB wifi dongles that work in Sonoma lose some of the functionality of the Apple ecosystem like AirDrop, iPhone camera, etc.
 - Otherwise, Sonoma beta works fine on this PC, with few and minor bugs detected so far.

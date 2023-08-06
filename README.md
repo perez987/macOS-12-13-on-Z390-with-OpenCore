@@ -48,7 +48,7 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
-<h3>[Sonoma beta notes](#sonoma-beta-notes)</h3> (July 2023)
+### [Sonoma beta notes](#sonoma-beta-notes) (July 2023)
 
 <h3>OpenCore</h3>
 

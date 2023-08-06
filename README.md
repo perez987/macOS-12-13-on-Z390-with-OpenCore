@@ -142,7 +142,7 @@ Notes:
 - `enable-metal=01` to enable Metal 3 in Ventura
 
 <details>
-<summary>Image: iGPU as secondary card</summary>
+<summary><b>Image: iGPU as secondary card</b></summary>
 <br>
 <img src="iGPU as secondary card.png">
 </details>
@@ -202,7 +202,7 @@ Note:
 - `force-online=01` to force online status on all displays (mandatory).
 
 <details>
-<summary>Image: iGPU as main card</summary>
+<summary><b>Image: iGPU as main card</b></summary>
 <br>
 <img src="iGPU as main card.png">
 </details>
@@ -480,7 +480,7 @@ In summary, the OCLP approach works, at least for me. As a preliminary fix, mayb
 **Important**: `com.apple.iokit.IOSkywalkFamily` blocking must have `Enabled=True` and `Strategy=Exclude`. Otherwise you get kernel panic at boot.
 
 <details>
-<summary><b>Wifi back in Sonoma</b></summary>
+<summary><b>Image: Wifi back in Sonoma</b></summary>
 <br>
 <img src="Wifi active again.png">
 </details>

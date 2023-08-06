@@ -479,7 +479,11 @@ In summary, the OCLP approach works, at least for me. As a preliminary fix, mayb
   
 **Important**: `com.apple.iokit.IOSkywalkFamily` blocking must have `Enabled=True` and `Strategy=Exclude`. Otherwise you get kernel panic at boot.
 
-![Sonoma wifi](wifi-menubar.png)
+<details>
+<summary><b>Wifi back in Sonoma</b></summary>
+<br>
+<img src="Wifi active again.png">
+</details>
 
 ### Credits
 

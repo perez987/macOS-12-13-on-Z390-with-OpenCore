@@ -9,7 +9,7 @@
 	</ul></b></td></tr>
 </table>
 
-<h3>Hardware
+### Hardware
 
 <table>
        <tr><td>Motherboard</td><td>Gigabyte Z390 Aorus Elite</td></tr>
@@ -21,7 +21,7 @@
        <tr><td>Wifi + BT</td><td>Fenvi FV-T919 BCM94360CD</td></tr>
 </table>
 
-<h3>What works well?
+### What works well?
 
 <table>
 <tr><td>Radeon graphics card (VDA decoder fully supported)</td></tr>
@@ -31,7 +31,7 @@
 <tr><td>Airdrop, iMessage (wifi + Bluetooth)</td></tr>
 </table>
 
-<h3>BIOS settings (version F10)
+### BIOS settings (version F10)
 
 <table>
 <tr><td>CFG Lock: Disabled</td></tr>
@@ -48,9 +48,9 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
-[### Sonoma beta notes](#sonoma-beta-notes) (July 2023)
+### [Sonoma beta notes](#sonoma-beta-notes) (July 2023)
 
-<h3>OpenCore</h3>
+### OpenCore
 
 For the installation / update to be successful, 3 parameters related to security must be set:
 
@@ -60,7 +60,7 @@ For the installation / update to be successful, 3 parameters related to security
 
 These security options can be changed after installation as they do not are required for Monterey / Ventura to run.
 
-<h3>SMBIOS</h3>
+### SMBIOS
 
 iMac19,1 SMBIOS requires:
 
@@ -75,11 +75,11 @@ iMacPro1,1 or MacPro7,1 SMBIOS require:
 - RestrictEvents.kext to avoid RAM misconfiguration warnings (only MacPro7,1)
 - CPUFriend.kext: not mandatory but in my opinion improves CPU Power Management (only MacPro7,1).
 
-<h3>CPUFriend.kext</h3>
+### CPUFriend.kext
 
 Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does not run at low frequency as often as it does with iMac19.1 or iMacPro1,1. For this reason, I have generated a CPUFriendDataProvider.kext extension by the CPUFriendFriend command to accompany CPUFriend.kext. Remember that this kext is specific to my CPU: i7 9700, try building your own if yours differs. With these 2 kexts (CPUFriendDataProvider.kext + CPUFriend.kext) the CPU shows correct power management and frequency drops to 800 MHz at system idle.
 
-<h3>SSDTs, drivers and tools</h3>
+### SSDTs, drivers and tools
 
 **SSDTs**
 
@@ -100,7 +100,7 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 
 - OpenShell.efi: UEFI shell to perform command line tasks from OpenCore
 
-<h3>config.plist</h3>
+### config.plist
 
 Some settings:
 
@@ -110,7 +110,7 @@ Some settings:
 	(`agdpmod=pikera` not needed with RX 580 or Polaris card, only with RX 6600 and Navi cards)
 - Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
 
-<h3>Intel UHD 630 headless mode</h3>
+### Intel UHD 630 headless mode
 
 - iGPU and dGPU must be enabled in BIOS with dGPU as primary
 - There should be no cable between iGPU HDMI port and any type of display
@@ -147,7 +147,7 @@ Notes:
 <img src="iGPU as secondary card.png">
 </details>
 
-<h3>Intel UHD 630 as single GPU
+### Intel UHD 630 as single GPU
 
 If you don't have an external graphics card and need to use the iGPU as single card, you have to use iMac19,1 SMBIOS with code in config.plist to patch the framebuffer and other properties so that the iGPU is well detected:
 
@@ -207,7 +207,7 @@ Note:
 <img src="iGPU as main card.png">
 </details>
 
-<h3>AMD RX 6600 on Ventura with MacPro or iMacPro SMBIOS</h3>
+### AMD RX 6600 on Ventura with MacPro or iMacPro SMBIOS
 
 AMD Navi cards run fine on Ventura when using iMac SMBIOS with `agdpmod=pikera` in boot args as the only needed setting. But when using MacPro or iMacPro SMBIOS a lot of users have reported black screen. The simplest way to fix this is to add in DeviceProperties of config.plist properties that set Henbury framebuffer for each of the 4 ports of this GPU.
 
@@ -389,7 +389,7 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "VEGA", 0x00000000)
 }  
 ```
 
-<h3>Installing Monterey / Ventura</h3>
+### Installing Monterey / Ventura
 
 The process is almost the same for installation and for update:
 
@@ -398,7 +398,7 @@ The process is almost the same for installation and for update:
 - Run Install macOS Monterey / Ventura app or the setup program from the booted USB
 - The process has 2 reboots booting from Install macOS disk and a third reboot booting from the target disk with Monterey.
 
-<h3>SMBIOS and config.plist files</h3>
+### SMBIOS and config.plist files
 
 There are different configuration files. Variants are included for 4 possible SMBIOS:
 
@@ -421,13 +421,13 @@ Notes
 - add serial numbers for the SMBIOS model
 - USB ports map is specific for muy motherboard: Z390 Aorus Elite.
 
-<h3>Important!</h3>
+### Important!
 
 1. Don't forget to rename the selected config file to config.plist.
 2. Do ResetNVRAM the first time you boot a new EFI.
 3. Press spacebar to show auxiliary entries in the picker.
 
-<h3>Sonoma beta notes</h3>
+### Sonoma beta notes
 
 - OTA updates (incremental updates from Software Update) don't work (the update doesn't even show up in the Software Update panel) except with iMac19,1 SMBIOS, probably related to Hackintosh missing Apple T2 chip since iMac19,1 lacks T2 chip but iMacPro1,1 and MacPro7,1 both have T2 chip.
 - If you use iMacPro1,1 or MacPro7,1 SMBIOS, there is another possibility to have incremental updates without changing the SMBIOS: add RestrictEvents extension and `revpatch=sbvmm` argument in boot args.
@@ -436,7 +436,7 @@ Notes
 - Broadcom BCM4360 series Wi-Fi do not work in Sonoma because the system does not include the drivers. Therefore, the Fenvi T919 card, which has worked very well OOTB so far, in Sonoma only provides Bluetooth. This is a serious inconvenience because the different USB wifi dongles that work in Sonoma lose some of the functionality of the Apple ecosystem like AirDrop, iPhone camera, etc.
 - Otherwise, Sonoma beta works fine on this PC, with few and minor bugs detected so far.
 
-<h3>Fenvi T919 wifi back on Sonoma</h3>
+### Fenvi T919 wifi back on Sonoma
 
 macOS Sonoma has removed support for all Broadcom Wi-Fi fitted in pre-2017 Macs:
 
@@ -481,7 +481,7 @@ In summary, the OCLP approach works, at least for me. As a preliminary fix, mayb
 
 ![Sonoma wifi](wifi-menubar.png)
 
-<h3>Credits</h3>
+### Credits
 
 <table>
 <tr><td><a href=https://github.com/acidanthera target=_blank>Acidanthera</a></td><td>OpenCore and kexts</td></tr>

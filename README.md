@@ -48,7 +48,63 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
-### [Sonoma beta notes](#sonoma-beta-notes) (July 2023)
+### Sonoma beta notes (June 2023)
+
+- OTA updates (incremental updates from Software Update) don't work (the update doesn't even show up in the Software Update panel) except with iMac19,1 SMBIOS, probably related to Hackintosh missing Apple T2 chip since iMac19,1 lacks T2 chip but iMacPro1,1 and MacPro7,1 both have T2 chip.
+- If you use iMacPro1,1 or MacPro7,1 SMBIOS, there is another possibility to have incremental updates without changing the SMBIOS: add RestrictEvents extension and `revpatch=sbvmm` argument in boot args.
+- Both changes (SMBIOS and RestrictEvents with boot arg) can be reverted after the update.
+- Updating via the full installer package works with any of the 3 SMBIOS.
+- Broadcom BCM4360 series Wi-Fi do not work in Sonoma because the system does not include the drivers. Therefore, the Fenvi T919 card, which has worked very well OOTB so far, in Sonoma only provides Bluetooth. This is a serious inconvenience because the different USB wifi dongles that work in Sonoma lose some of the functionality of the Apple ecosystem like AirDrop, iPhone camera, etc.
+- Otherwise, Sonoma beta works fine on this PC, with few and minor bugs detected so far.
+
+### Fenvi T919 wifi back on Sonoma (July 2023)
+
+macOS Sonoma has removed support for all Broadcom Wi-Fi fitted in pre-2017 Macs:
+
+1. AirPortBrcmNIC
+- 14E4,43BA >> BCM43602
+- 14E4,43A3 >> BCM4350
+- 14E4,43A0 >> BCM4360
+
+2. AirPortBrcm4360
+- 14E4,4331 >> BCM94331
+- 14E4,4353 >> BCM943224.
+
+Fenvi T919 has a BCM94360CD (14E4,43A0 >> BCM4360) so the wifi doesn't work on Sonoma. Bluetooth part works as before.
+
+OCLP developers have been working on this and have released a Sonoma-specific beta version that fixes the problem and brings Wi-Fi back to what it was in Monterey and Ventura. I know that it is not the ideal situation, many of us want to have the system as vanilla as possible but what the OCLP team has achieved is amazing. You have the instructions in this link (look for **Hackintosh notes**):
+
+[Early preview of macOS Sonoma support now available!](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494)
+
+You can download the latest version of this bracnh of OCLP by looking for the link with this text:
+
+* Latest builds for the sonoma-development branch can be found below:
+	* Nightly.link: OpenCore-Patcher.app (Sonoma Development).
+
+**Note**: OCLP developers prefer that you download OCLP beta from the link they post themselves, for this reason I do not put a direct link here. It is a way to take users to the original post.
+
+My wifi is Fenvi T919, so I have tested this OCLP preview version. I have followed TO THE LETTER the instructions and they have worked well. I have wifi and Airdrop back in Sonoma. Note that [khronokernel](https://github.com/khronokernel)'s instructions must be followed EXACTLY.
+
+Don't forget to enable (`Enabled=True`) 3 kexts to be added and 1 kext to be blocked, they are disabled by default.
+
+For anyone having trouble, check out these important details:
+
+* `csr-active-config | data | 03080000`
+* `boot-args | string | amphi=0x80`
+* `com.apple.iokit.IOSkywalkFamily `blocked
+* `IOSkywalk.kext`, `IO80211FamilyLegacy.kext` and `AirPortBrcmNIC.kext` added in this order (Kexts folder and config.plist).
+
+I guess incremental updates are lost with this setup, updates can be done from Software Update but the full installer package is downloaded and not the delta package that only contains the incremental changes.
+
+In summary, the OCLP approach works, at least for me. As a preliminary fix, maybe it doesn't work on some systems.
+  
+**Important**: `com.apple.iokit.IOSkywalkFamily` blocking must have `Enabled=True` and `Strategy=Exclude`. Otherwise you get kernel panic at boot.
+
+<details>
+<summary><b>Image: Wifi back in Sonoma</b></summary>
+<br>
+<img src="Wifi active again.png">
+</details>
 
 ### OpenCore
 
@@ -426,64 +482,6 @@ Notes
 1. Don't forget to rename the selected config file to config.plist.
 2. Do ResetNVRAM the first time you boot a new EFI.
 3. Press spacebar to show auxiliary entries in the picker.
-
-### Sonoma beta notes
-
-- OTA updates (incremental updates from Software Update) don't work (the update doesn't even show up in the Software Update panel) except with iMac19,1 SMBIOS, probably related to Hackintosh missing Apple T2 chip since iMac19,1 lacks T2 chip but iMacPro1,1 and MacPro7,1 both have T2 chip.
-- If you use iMacPro1,1 or MacPro7,1 SMBIOS, there is another possibility to have incremental updates without changing the SMBIOS: add RestrictEvents extension and `revpatch=sbvmm` argument in boot args.
-- Both changes (SMBIOS and RestrictEvents with boot arg) can be reverted after the update.
-- Updating via the full installer package works with any of the 3 SMBIOS.
-- Broadcom BCM4360 series Wi-Fi do not work in Sonoma because the system does not include the drivers. Therefore, the Fenvi T919 card, which has worked very well OOTB so far, in Sonoma only provides Bluetooth. This is a serious inconvenience because the different USB wifi dongles that work in Sonoma lose some of the functionality of the Apple ecosystem like AirDrop, iPhone camera, etc.
-- Otherwise, Sonoma beta works fine on this PC, with few and minor bugs detected so far.
-
-### Fenvi T919 wifi back on Sonoma
-
-macOS Sonoma has removed support for all Broadcom Wi-Fi fitted in pre-2017 Macs:
-
-1. AirPortBrcmNIC
-- 14E4,43BA >> BCM43602
-- 14E4,43A3 >> BCM4350
-- 14E4,43A0 >> BCM4360
-
-2. AirPortBrcm4360
-- 14E4,4331 >> BCM94331
-- 14E4,4353 >> BCM943224.
-
-Fenvi T919 has a BCM94360CD (14E4,43A0 >> BCM4360) so the wifi doesn't work on Sonoma. Bluetooth part works as before.
-
-OCLP developers have been working on this and have released a Sonoma-specific beta version that fixes the problem and brings Wi-Fi back to what it was in Monterey and Ventura. I know that it is not the ideal situation, many of us want to have the system as vanilla as possible but what the OCLP team has achieved is amazing. You have the instructions in this link (look for **Hackintosh notes**):
-
-[Early preview of macOS Sonoma support now available!](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494)
-
-You can download the latest version of this bracnh of OCLP by looking for the link with this text:
-
-* Latest builds for the sonoma-development branch can be found below:
-	* Nightly.link: OpenCore-Patcher.app (Sonoma Development).
-
-**Note**: OCLP developers prefer that you download OCLP beta from the link they post themselves, for this reason I do not put a direct link here. It is a way to take users to the original post.
-
-My wifi is Fenvi T919, so I have tested this OCLP preview version. I have followed TO THE LETTER the instructions and they have worked well. I have wifi and Airdrop back in Sonoma. Note that [khronokernel](https://github.com/khronokernel)'s instructions must be followed EXACTLY.
-
-Don't forget to enable (`Enabled=True`) 3 kexts to be added and 1 kext to be blocked, they are disabled by default.
-
-For anyone having trouble, check out these important details:
-
-* `csr-active-config | data | 03080000`
-* `boot-args | string | amphi=0x80`
-* `com.apple.iokit.IOSkywalkFamily `blocked
-* `IOSkywalk.kext`, `IO80211FamilyLegacy.kext` and `AirPortBrcmNIC.kext` added in this order (Kexts folder and config.plist).
-
-I guess incremental updates are lost with this setup, updates can be done from Software Update but the full installer package is downloaded and not the delta package that only contains the incremental changes.
-
-In summary, the OCLP approach works, at least for me. As a preliminary fix, maybe it doesn't work on some systems.
-  
-**Important**: `com.apple.iokit.IOSkywalkFamily` blocking must have `Enabled=True` and `Strategy=Exclude`. Otherwise you get kernel panic at boot.
-
-<details>
-<summary><b>Image: Wifi back in Sonoma</b></summary>
-<br>
-<img src="Wifi active again.png">
-</details>
 
 ### Credits
 

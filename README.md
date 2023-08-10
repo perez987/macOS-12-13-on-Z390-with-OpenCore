@@ -48,6 +48,8 @@
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
 
+-----
+
 ### Sonoma beta notes (June 2023)
 
 - OTA updates (incremental updates from Software Update) don't work (the update doesn't even show up in the Software Update panel) except with iMac19,1 SMBIOS, probably related to Hackintosh missing Apple T2 chip since iMac19,1 lacks T2 chip but iMacPro1,1 and MacPro7,1 both have T2 chip.
@@ -105,6 +107,8 @@ In summary, the OCLP approach works, at least for me. As a preliminary fix, mayb
 <br>
 <img src="Wifi active again.png">
 </details>
+
+-----
 
 ### OpenCore
 
@@ -166,6 +170,8 @@ Some settings:
 	(`agdpmod=pikera` not needed with RX 580 or Polaris card, only with RX 6600 and Navi cards)
 - Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
 
+-----
+
 ### Intel UHD 630 headless mode
 
 - iGPU and dGPU must be enabled in BIOS with dGPU as primary
@@ -202,6 +208,8 @@ Notes:
 <br>
 <img src="iGPU as secondary card.png">
 </details>
+
+-----
 
 ### Intel UHD 630 as single GPU
 
@@ -262,6 +270,8 @@ Note:
 <br>
 <img src="iGPU as main card.png">
 </details>
+
+-----
 
 ### AMD RX 6600 on Ventura with MacPro or iMacPro SMBIOS
 
@@ -444,6 +454,7 @@ DefinitionBlock ("", "SSDT", 2, "HACK", "VEGA", 0x00000000)
     }
 }  
 ```
+-----
 
 ### Installing Monterey / Ventura
 
@@ -453,6 +464,8 @@ The process is almost the same for installation and for update:
 - Download macOS from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info
 - Run Install macOS Monterey / Ventura app or the setup program from the booted USB
 - The process has 2 reboots booting from Install macOS disk and a third reboot booting from the target disk with Monterey.
+
+----
 
 ### SMBIOS and config.plist files
 
@@ -482,6 +495,8 @@ Notes
 1. Don't forget to rename the selected config file to config.plist.
 2. Do ResetNVRAM the first time you boot a new EFI.
 3. Press spacebar to show auxiliary entries in the picker.
+
+-----
 
 ### Credits
 

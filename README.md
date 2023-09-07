@@ -1,9 +1,9 @@
-# macOS Ventura / Monterey / Sonoma with OpenCore on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
+# macOS Ventura / Monterey with OpenCore on Z390 Aorus Elite motherboard (AMD RX 6600 or Intel UHD 630)
 
 <table>
 <tr><td align=center width=272px height=272px><img src="macOS13.png" alt="Monterey HDD"></td></tr>
 <tr><td><b><ul>
-	<li>Guide using OpenCore for Ventura / Monterey / Sonoma on Gigabyte Z390 Aorus Elite motherboard</li>
+	<li>Guide using OpenCore for Ventura / Monterey on Gigabyte Z390 Aorus Elite motherboard</li>
 	<li>Settings for AMD dGPU as main card or iGPU as single card</li>
 	<li>EFI folder available for different SMBIOS.</li>
 	</ul></b></td></tr>
@@ -47,66 +47,6 @@
 <tr><td>DVMT Pre-Allocated: 256M or higher</td></tr>
 <tr><td>Integrated Graphics: Disabled / Enabled (according to SMBIOS)</td></tr>
 </table>
-
------
-
-### Sonoma beta notes (June 2023)
-
-- OTA updates (incremental updates from Software Update) don't work (the update doesn't even show up in the Software Update panel) except with iMac19,1 SMBIOS, probably related to Hackintosh missing Apple T2 chip since iMac19,1 lacks T2 chip but iMacPro1,1 and MacPro7,1 both have T2 chip.
-- If you use iMacPro1,1 or MacPro7,1 SMBIOS, there is another possibility to have incremental updates without changing the SMBIOS: add RestrictEvents extension and `revpatch=sbvmm` argument in boot args.
-- Both changes (SMBIOS and RestrictEvents with boot arg) can be reverted after the update.
-- Updating via the full installer package works with any of the 3 SMBIOS.
-- Broadcom BCM4360 series Wi-Fi do not work in Sonoma because the system does not include the drivers. Therefore, the Fenvi T919 card, which has worked very well OOTB so far, in Sonoma only provides Bluetooth. This is a serious inconvenience because the different USB wifi dongles that work in Sonoma lose some of the functionality of the Apple ecosystem like AirDrop, iPhone camera, etc.
-- Otherwise, Sonoma beta works fine on this PC, with few and minor bugs detected so far.
-
-### Fenvi T919 wifi back on Sonoma (July 2023)
-
-macOS Sonoma has removed support for all Broadcom Wi-Fi fitted in pre-2017 Macs:
-
-1. AirPortBrcmNIC
-- 14E4,43BA >> BCM43602
-- 14E4,43A3 >> BCM4350
-- 14E4,43A0 >> BCM4360
-
-2. AirPortBrcm4360
-- 14E4,4331 >> BCM94331
-- 14E4,4353 >> BCM943224.
-
-Fenvi T919 has a BCM94360CD (14E4,43A0 >> BCM4360) so the wifi doesn't work on Sonoma. Bluetooth part works as before.
-
-OCLP developers have been working on this and have released a Sonoma-specific beta version that fixes the problem and brings Wi-Fi back to what it was in Monterey and Ventura. I know that it is not the ideal situation, many of us want to have the system as vanilla as possible but what the OCLP team has achieved is amazing. You have the instructions in this link (look for **Hackintosh notes**):
-
-[Early preview of macOS Sonoma support now available!](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077#issuecomment-1646934494)
-
-You can download the latest version of this bracnh of OCLP by looking for the link with this text:
-
-* Latest builds for the sonoma-development branch can be found below:
-	* Nightly.link: OpenCore-Patcher.app (Sonoma Development).
-
-**Note**: OCLP developers prefer that you download OCLP beta from the link they post themselves, for this reason I do not put a direct link here. It is a way to take users to the original post.
-
-My wifi is Fenvi T919, so I have tested this OCLP preview version. I have followed TO THE LETTER the instructions and they have worked well. I have wifi and Airdrop back in Sonoma. Note that [khronokernel](https://github.com/khronokernel)'s instructions must be followed EXACTLY.
-
-Don't forget to enable (`Enabled=True`) 3 kexts to be added and 1 kext to be blocked, they are disabled by default.
-
-For anyone having trouble, check out these important details:
-
-* `csr-active-config | data | 03080000`
-* `boot-args | string | amphi=0x80`
-* `com.apple.iokit.IOSkywalkFamily `blocked
-* `IOSkywalk.kext`, `IO80211FamilyLegacy.kext` and `AirPortBrcmNIC.kext` added in this order (Kexts folder and config.plist).
-
-I guess incremental updates are lost with this setup, updates can be done from Software Update but the full installer package is downloaded and not the delta package that only contains the incremental changes.
-
-In summary, the OCLP approach works, at least for me. As a preliminary fix, maybe it doesn't work on some systems.
-  
-**Important**: `com.apple.iokit.IOSkywalkFamily` blocking must have `Enabled=True` and `Strategy=Exclude`. Otherwise you get kernel panic at boot.
-
-<details>
-<summary><b>Image: Wifi back in Sonoma</b></summary>
-<br>
-<img src="Wifi active again.png">
-</details>
 
 -----
 
@@ -164,11 +104,11 @@ Although the CPU is well detected with MacPro's SMBIOS, my guess is that it does
 
 Some settings:
 
-- DeviceProperties >> Add >> PciRoot(0x0)/Pci(0x14,0x0): acpi-wake-type as data=01, to improve wake from sleep
-- Misc >> Boot >> PickerAttributes=144 to enable Flavours system
+- DeviceProperties >> Add >> PciRoot(0x0)/Pci(0x14,0x0): `acpi-wake-type` as `data=01`, to improve wake from sleep
+- Misc >> Boot >> `PickerAttributes=144` to enable Flavours system
 - NVRAM> 7C436110-AB2A-4BBB-A880-FE41995C9F82> boot-args: `alcid=7 agdpmod=pikera`
-	(`agdpmod=pikera` not needed with RX 580 or Polaris card, only with RX 6600 and Navi cards)
-- Misc >> Security >> AllowToggleSip=True to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
+	(`agdpmod=pikera` not needed with RX 580 or Polaris card, only with Navi cards)
+- Misc >> Security >> `AllowToggleSip=True` to show in the picker the ToggleSIP tool that allows to easily switch between SIP enabled and SIP disabled for the current boot.
 
 -----
 
@@ -463,7 +403,7 @@ The process is almost the same for installation and for update:
 - You need a working EFI folder
 - Download macOS from Software Update or create USB installer; I don't comment about creating USB installer because there are a lot of sites with this info
 - Run Install macOS Monterey / Ventura app or the setup program from the booted USB
-- The process has 2 reboots booting from Install macOS disk and a third reboot booting from the target disk with Monterey.
+- The process has 2 reboots booting from Install macOS disk and a third reboot booting from the target disk with Monterey / Ventura.
 
 ----
 

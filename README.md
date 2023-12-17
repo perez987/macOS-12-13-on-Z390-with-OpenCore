@@ -409,22 +409,6 @@ The process is almost the same for installation and for update:
 
 ### SMBIOS and config.plist files
 
-There are different configuration files. Variants are included for 4 possible SMBIOS:
-
-- iMac19,1 with AMD dGPU + iGPU headless mode
-- iMac19,1 with iGPU as main card without dGPU
-- MacPro7,1 with dGPU + iGPU disabled
-- iMacPro1,1 with dGPU + iGPU disabled.
-
-List of config.plist files:
-
-- config-13-imac-amd.plist: iMac19,1 + dGPU AMD + iGPU enabled in BIOS
-- config-13-imac-intel.plist: iMac19,1 + iGPU enabled in BIOS as main card
-- config-13-imacpro.plist: iMacPro1,1 + dGPU AMD + iGPU disabled in BIOS
-- config-13-macpro.plist: MacPro7,1 + dGPU AMD + iGPU disabled in BIOS.
-
-Notes
-
 - rename selected config file to config.plist
 - current GPU is AMD RX 6600 XT; for RX 580 and other Polaris cards remove `agdpmod=piker`a from boot-args and don't use the framebuffer patch
 - add serial numbers for the SMBIOS model
